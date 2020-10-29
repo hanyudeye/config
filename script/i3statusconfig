@@ -1,0 +1,106 @@
+# i3status configuration file.
+
+general {
+        colors = true
+        output_format=i3bar
+        # color_good ='#88b090'     
+        color_good ='#ff0000'     
+        color_degraded = '#ccdc90'  
+        color_bad = '#e89393'   
+        #output_format= "dzen2"
+        #interval = 20
+        interval =5 
+}
+
+#order += "ipv6"
+#order += "disk /mnt/data"
+#order += "disk /"
+#order += "disk /home"
+#order += "run_watch DHCP"
+#order += "run_watch VPN"
+order += "tztime local"
+order += "wireless _first_"
+#order += "ethernet _first_"
+#order += "load"
+# order += "cpu_temperature 0"
+# order += "cpu_usage"
+#order += "battery 0"
+#order += "volume master"
+
+wireless _first_ {
+        # format_up = "Archlinux      |WIFI:%ip@%essid-%quality"
+        #format_up = "AMinglinux :)      |WIFI:%ip@%essid-%quality"
+        format_up= ""
+        format_down= " "
+}
+
+ethernet _first_ {
+        # if you use %speed, i3status requires root privileges
+        #format_up = "Archlinux      | %ip (%speed)"
+        #format_down = ""
+        format_down = "制定目标，一步一个脚印!"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining %emptytime"
+        format_down = "No battery"
+        status_chr = "⚇ CHR"
+        status_bat = "⚡ BAT"
+        status_full = "☻ FULL"
+        path = 	"/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 20
+        threshold_type= time
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+tztime local {
+        #format = "%Y-%m-%d %A %H:%M"
+        align = "left"
+        # align = "right"
+        # format = "%Y年%m月%d日 %A %H:%M:%S"
+        format = "%A  %m月%d %H:%M"
+        # format = "%Y年%m月%d日 %A %H:%M"
+        # format = "%H:%M %Y-%m-%d %A "
+}
+
+load {
+        format = "%5min"
+}
+
+disk "/mnt/data" {
+        format = "Data:%avail"
+}
+disk "/" {
+        format = "Root:%avail"
+}
+disk "/home" {
+        format = "Home:%avail"
+}
+
+cpu_temperature 0 {
+        format = "CPU %degrees°C"
+        format = ""
+	max_threshold = 60
+	path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+cpu_usage {
+	format = "%usage"
+         format = ""
+}
+
+volume master {
+        format = "♪%volume"
+        format_muted = "♪muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+

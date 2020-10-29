@@ -1,0 +1,20 @@
+自动补全英文
+* 安装
+Copy file company-english-helper.el and company-english-helper-data.el
+to directory ~/elisp/
+And set in your ~/.emacs like this:
+
+(add-to-list 'load-path (expand-file-name "~/elisp"))
+And the following to your ~/.emacs startup file.
+(require 'company-english-helper)
+Execute command `toggle-company-english-helper' to write english on the fly!
+
+# /home/wuming/.emacs.d/private/companyenglish/Readme.org
+
+Customize your dict.
+Default english dictionary is generate from stardict KDict dictionary with below command
+
+python ./stardict.py stardict-kdic-ec-11w-2.4.2/kdic-ec-11w.ifo
+You can replace with your favorite stardict dictionary's info filepath to generate your own company-english-helper-data.el .
+/usr/share/stardict/dic
+是不是觉得我的英文特别好

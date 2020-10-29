@@ -1,0 +1,302 @@
+# i3 config file (v4)
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# Super key(mod4 =windows logo key/Command key)
+set $mod Mod4
+
+
+#===autostart programs===
+
+# exec --no-startup-id mate-power-manager & 
+# exec --no-startup-id redshift & 
+# exec --no-startup-id xcompmgr -FCf -nc -t -5 &
+# exec --no-startup-id LANG="zh_CN.UTF-8" fcitx &
+# exec --no-startup-id nm-applet &
+# #exec --no-startup-id megasync
+# # exec --no-startup-id ss-qt5 &
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id guake &
+
+
+#===appearance===
+
+#===i3-gnome 
+# exec --no-startup-id /usr/libexec/gsd-xsettings
+# exec --no-startup-id gnome-flashback
+
+#===appearance===
+
+#---wallpaper---
+# single pictures
+exec --no-startup-id feh --bg-scale "/home/wuming/图片/wallpaper/modern-family-wallpaper-7.jpg" &
+
+
+font pango:monospace 14
+
+#---bar---
+bar {
+        status_command i3status
+}
+
+
+#---display---
+# exec ~/script/laptopvga.sh &
+
+#---keyboard---
+exec /home/wuming/config/script/swapctrl.ini &
+
+
+#---window style---
+
+#---popups---
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="gnome-clocks"] floating enable
+
+# float programs(find the programs'names in "/usr/share/applictions")
+# for_window [class="feh"] floating enable
+for_window [class="vlc"] floating enable
+# for_window [instance="guake"] floating enable
+# for_window [instance="alarm-clock-applet"] floating enable
+
+#===programs shortcuts===
+
+# 待机
+bindsym  $mod+p exec "sudo pm-suspend"
+
+# dmenu (a program launcher)
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop 
+# run rofi
+# bindsym $mod+d exec rofi -show drun -theme "~/config/script/gaara-theme"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -p ">"' --entry-type=name
+# start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+
+# terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# 屏幕截图
+bindsym $mod+Print exec scrot
+bindsym $mod+z exec "flameshot gui"
+
+#===workspace control===
+# Workspace names
+# workspace "1:Arch" output eDP1
+# workspace "1:Arch" output LVDS-1-1
+# workspace "2:Web" output VGA-1-1
+# workspace "3:Code" output VGA-1-1
+# workspace "9:Mail" output LVDS-1-1
+
+# putting clients on specific workspaces
+#assign [class="Chromium"] 0
+#assign [class="Webstorm"] 0
+
+#---switch workspace---
+
+# switch to near workspace
+bindsym mod1+Tab workspace next
+bindsym $mod+Tab workspace prev
+
+set $ws1 1:emacs
+set $ws2 2:document
+set $ws3 3:chrome
+set $ws4 4:game
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+m workspace $ws1
+bindsym $mod+n workspace $ws2
+bindsym $mod+o workspace $ws2
+bindsym $mod+i workspace $ws3
+bindsym $mod+y workspace $ws4
+
+# bindsym $mod+Escape workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# assign [class="jetbrains-android-studio"] $ws6
+assign [class="Emacs"] $ws1
+# assign [class="Gnome-terminal"] $ws2
+assign [class="okular"] $ws2
+assign [class="zeal"] $ws2
+assign [class="Google-chrome"] $ws3
+# assign [class="^URxvt$"] 2
+
+#===window control===
+
+# fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# kill focused window($mod4=Alt)
+bindsym mod1+F4 kill
+
+# hide | show window(minus is "-" and plus is "+".)
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+bindsym mod1+space scratchpad show 
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+c layout toggle split
+
+# 设置边框和浮动边框
+# default_border normal|pixel <px>
+# default_floating_border normal|pixel <px>
+
+
+# change border style
+# 取消边框
+# bindsym $mod+u border none
+# bindsym $mod+n border normal
+# bindsym $mod+o border 1pixel
+# bindsym $mod+o border pixel 10
+# bindsym $mod+b border toggle
+
+#---window focus---
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# foucus follows mouse(cursor)
+focus_follows_mouse yes
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+right focus right
+
+# focus the parent container
+# bindsym $mod+mod4+p focus parent
+bindsym $mod+a focus parent
+# focus the child container
+#bindsym $mod+d focus child
+
+#---move window---
+
+# Use Mouse+$mod to drag a floating window
+floating_modifier $mod
+
+# move floating/tiling window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#---split window---
+
+# horizontal orientation
+bindsym $mod+mod1+h split h
+ 
+# vertical orientation
+bindsym $mod+v split v
+
+#---resize window---
+
+mode "resize" {
+        # bindsym j resize shrink width 10 px or 10 ppt
+        # bindsym k resize grow height 10 px or 10 ppt
+        # bindsym l resize shrink height 10 px or 10 ppt
+        # bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+    	# same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+    
+    	# back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+bindsym $mod+r mode "resize"
+
+#===volume control===
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+# screen off | sleep | shutdown(time unit: seconds)
+bindsym $mod+Shift+q mode "$mode_system"
+mode "$mode_system" {
+    # bindsym l exec --no-startup-id i3lock -c '#000000', mode "default"
+    bindsym l exec --no-startup-id i3lock -c '000000', mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym o exec --no-startup-id systemctl poweroff, mode "default"
+    bindsym Escape mode "default"
+}
+
+
+#===manage i3===
+
+
+# reload the configuration file
+bindsym $mod+Shift+r reload
+
+# restart i3 inplace
+bindsym $mod+Shift+s  restart
+
+# i3lock
+ mode "i3lock: Return to lock/Escape to Cancel" {
+            # bindsym Return mode "default" exec i3lock -I 600 -i ~/图片/Pictures/2.jpg
+            # bindsym Return mode "default" exec i3lock -i ~/2.jpg
+            bindsym Return mode "default" exec i3lock -c '000000'
+            # bindsym Return mode "default" exec i3lock 
+            bindsym Escape mode "default"
+    }
+
+
+# bindsym Ctrl+mod1+l mode "i3lock: Return to lock/Escape to Cancel"
+# 改为直接执行了。
+bindsym Ctrl+mod1+l exec i3lock -c '000000'
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit i3
+

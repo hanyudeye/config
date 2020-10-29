@@ -1,0 +1,324 @@
+
+(with-eval-after-load 'org
+
+  ;; 1. 变量初始化
+
+  ;; 初始化org-agenda 目录
+  (setq org-agenda-directory "~/org/agenda")
+
+;; 2.外观设置
+
+  ;; (require 'org-indent)
+  ;; (setq org-startup-indented t)
+  ;; Appearance:1 ends here
+
+
+ (defun zilongshanren-org/init-cal-china-x ()
+  (use-package cal-china-x
+    :config
+    (progn
+      (setq mark-holidays-in-calendar t)
+      (setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
+      (setq cal-china-x-general-holidays '((holiday-lunar 1 15 "元宵节")))
+      (setq calendar-holidays
+            (append cal-china-x-important-holidays
+                    cal-china-x-general-holidays
+                    ))
+      )))
+
+  ;; Do not truncate lines and enable word wrap
+
+  ;; [[file:org-config.org::*Appearance][Appearance:2]]
+  (set-default 'truncate-lines nil)
+  ;; (set-default 'word-wrap t)
+  (setq helm-buffers-truncate-lines nil)
+  (setq org-startup-truncated nil)
+  ;; Appearance:2 ends here
+
+
+
+  ;; Do not align Tags automatically
+
+  ;; [[file:org-config.org::*Appearance][Appearance:3]]
+  (setq org-auto-align-tags nil)
+  ;; Appearance:3 ends here
+
+
+  ;; 3. To-Do states and related
+  ;; Keywords
+
+  ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:1]]
+  (setq org-todo-keywords
+        (quote
+         ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
+  ;; To-Do states and related:1 ends here
+
+  ;; Colors for todo states
+
+  ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:2]]
+  (setq org-todo-keyword-faces
+        '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
+  ;; To-Do states and related:2 ends here
+
+
+;; 3. 设置capture 模板
+
+(setq org-capture-templates
+      '(
+        ;;工作任务
+        ("w"         ; hotkey
+         "Work Todo" ; name
+         entry       ; type
+         (file+headline (lambda () (concat org-agenda-directory "/work.org")) "Tasks") ;target
+         "* TODO [#A] %^{Task}" ; template
+         )
+        ;; 任务
+        ("t"
+         "Task Diary"
+         entry
+         (file+datetree (lambda () (concat org-agenda-directory "/tasks.org")))
+         "* TODO [#A] %^{Task}")
+        ;; 写私人日记
+        ("p"
+         "Journal"
+         item
+         (file+datetree (lambda () (concat org-agenda-directory "/journal.org")))
+         "- %U - %^{Activity}")
+        ;; 写工作日记(感想)
+        ("j"
+         "Work log"
+         item
+         (file+datetree (lambda () (concat org-agenda-directory "/work.org")) "Log")
+         "- %U - %^{Activity}")
+        ;;读书笔记
+        ("b"
+         "Add a book to read"
+         entry
+         (file+headline (lambda () (concat org-agenda-directory "/notes.org")) "Books to read")
+         "* TODO %^{Book name}\n%^{Why to read this book?}"
+         )
+        ;; 任务日记
+        ("s"
+         "Schedule an event or a task"
+         entry
+         (file+datetree (lambda () (concat org-agenda-directory "/tasks.org")))
+         "* %^{Event or Task}\nSCHEDULED: %^t"
+         )
+        ;; ("f"         ; hotkey
+        ;;  "test" ; name
+        ;;  entry       ; type
+        ;;  (file+headline (lambda () (concat org-agenda-directory "/work.org")) "Tasks") ;target
+        ;;  "* TODO [#A] %^{Task}\n%a%i%t%U\n" ; template
+        ;;  )
+
+        ;; ;;收集箱
+        ;; ("i"
+        ;;  "inbox" entry (file+headline (lambda()(concat org-agenda-directory "/inbox.org")) "inbox")
+        ;;  "* TODO [#B] %U %i%?" :empty-lines 1)
+
+        ))
+
+
+;; 4. 设置ａgenda
+;; 4.1 Enable the compact layout in agenda
+(setq org-agenda-compact-blocks t)
+
+;;4.2 Restore layout after exit from agenda view
+(setq org-agenda-restore-windows-after-quit t)
+
+;; 4.3 Default appointment duration (任务默认时长??)
+(setq org-agenda-default-appointment-duration 30)
+
+;; 4.4 Pressing ~Tab~ while the cursor is on a task will expand that task in a separate buffer
+(add-hook 'org-agenda-mode-hook
+          (lambda () (local-set-key [tab] 'org-agenda-tree-to-indirect-buffer)))
+
+;; Include these files and directories when creating the agenda
+;; org 文件 存储目录 为 ~/org
+(setq org-agenda-files (append
+                        (directory-files-recursively org-agenda-directory "\\.org$")
+                        (directory-files-recursively org-agenda-directory "\\.org.txt$")))
+
+;; 4.7 Don't show tasks in agenda if they are done (完成任务默认不显示)
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
+
+;; Max number of days to show in agenda
+;; (setq org-agenda-span 90)
+;; Warn about a deadline
+;; (setq org-deadline-warning-days 90)
+
+;; Agenda starts on the current day
+(setq org-agenda-start-on-weekday nil)
+
+
+;; Display the total number of tasks in Agenda. From http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
+;; (load (concat my-config-folder "/org-agenda-count.el"))
+(require 'org-agenda-count)
+
+;; Sorting strategy 排序策略
+(setq org-agenda-sorting-strategy
+      (quote
+       ((agenda priority-down alpha-up)
+        (todo priority-down alpha-up)
+        (tags priority-down alpha-up))))
+;; Agenda:10 ends here
+
+
+;; Display format
+(setq org-agenda-prefix-format
+      (quote
+       ((agenda . "%s %?-12t %e ")
+        (timeline . "  %s")
+        (todo . " %i %e ")
+        (tags . " %i %e ")
+        (search . " %i %e "))))
+
+;; Default format for columns view
+(setq org-columns-default-format
+      "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
+
+;; 禁止启动检测
+(setq org-agenda-inhibit-startup t)
+
+;; Helper functions
+;; Extract the date of completion, and use it for comparison. From http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
+
+;; [[file:org-config.org::*Helper functions][Helper functions:1]]
+(defun cmp-date-property (prop)
+  "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
+  (lexical-let ((prop prop))
+    #'(lambda (a b)
+
+        (let* ((a-pos (get-text-property 0 'org-marker a))
+               (b-pos (get-text-property 0 'org-marker b))
+               (a-date (or (org-entry-get a-pos prop)
+                           (format "<%s>" (org-read-date t nil "now"))))
+               (b-date (or (org-entry-get b-pos prop)
+                           (format "<%s>" (org-read-date t nil "now"))))
+               (cmp (compare-strings a-date nil nil b-date nil nil))
+               )
+          (if (eq cmp t) nil (signum cmp))
+          ))))
+;; Helper functions:1 ends here
+
+;; Sort agenda items by link's text and not link's URL
+
+;; [[file:org-config.org::*Helper functions][Helper functions:3]]
+(defun remove-priority (str)
+  (replace-regexp-in-string "\\[#[^\\[]*\\] " "" str))
+
+(defun extract-link-text (str)
+  (replace-regexp-in-string "\\[\\[\\([^][]+\\)\\]\\(\\[\\([^][]+\\)\\]\\)?\\]" "\\3" str))
+
+(defun org-cmp-alpha-2 (a b)
+  "Compare the headlines, alphabetically. (after extract link texts if any links present)"
+  (let* ((pla (text-property-any 0 (length a) 'org-heading t a))
+         (plb (text-property-any 0 (length b) 'org-heading t b))
+         (ta (and pla (substring a pla)))
+         (tb (and plb (substring b plb)))
+         (case-fold-search nil))
+    (when pla
+      (when (string-match (concat "\\`[ \t]*" (or (get-text-property 0 'org-todo-regexp a) "")
+                                  "\\([ \t]*\\[[a-zA-Z0-9]\\]\\)? *") ta)
+        (setq ta (substring ta (match-end 0))))
+      (setq ta (downcase ta)))
+    (when plb
+      (when (string-match (concat "\\`[ \t]*" (or (get-text-property 0 'org-todo-regexp b) "")
+                                  "\\([ \t]*\\[[a-zA-Z0-9]\\]\\)? *") tb)
+        (setq tb (substring tb (match-end 0))))
+      (setq tb (downcase tb)))
+    (setq ta (extract-link-text ta))
+    (setq tb (extract-link-text tb))
+    (cond ((not (or ta tb)) nil)
+          ((not ta) +1)
+          ((not tb) -1)
+          ((string-lessp ta tb) -1)
+          ((string-lessp tb ta) +1))))
+;; Helper functions:3 ends here
+
+;; Views
+
+;; [[file:org-config.org::*Views][Views:1]]
+(setq org-agenda-custom-commands
+      (quote
+       (
+        ("w" . "任务安排")
+        ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+        ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+        ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+        ("b" "Blog" tags-todo "BLOG")
+        ("Q" "Closed Tasks"
+         ((tags "CLOSED>=\"<-4w>\"" (
+                                     (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+                                     (org-agenda-sorting-strategy '(user-defined-down))
+                                     (org-agenda-overriding-header (format "Tasks done in the last week (%s)" (org-agenda-count "CLOSED")))
+                                     )))
+         nil)
+        ("H" "Z Tasks"
+         ((tags-todo "+PRIORITY=\"Z\""
+                     ((org-agenda-overriding-header (format "Z Tasks (%s)" (org-agenda-count ""))))))
+         nil)
+        ("W" "Work ToDos"
+         ((tags-todo "+work"
+                     ((org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
+                      (org-agenda-hide-tags-regexp "work")
+                      )))
+         nil)
+        ("E" "Non-Work ToDos"
+         ((tags-todo "-work-paper" (
+                              (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
+                              (org-agenda-cmp-user-defined 'org-cmp-alpha-2)
+                              (org-agenda-sorting-strategy '(user-defined-up))
+                              )))
+         nil)
+        )))
+;; Views:1 ends here
+
+
+
+;; On startup, content should be in folded state
+(setq org-startup-folded t)
+
+;; To-Do states and related
+;; (setq org-todo-keywords
+;;       (quote
+;;        ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
+
+;; Colors for todo states
+;; (setq org-todo-keyword-faces
+;;       '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
+
+;; Refile 把条目转移到其他agenda 文件节点
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-refile-targets '((nil :maxlevel . 9)
+                           (org-agenda-files :maxlevel . 9)))
+(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+(setq org-refile-use-outline-path (quote file))       ; Show full paths for refiling
+;; Refile:1 ends here
+
+;; Clocking (计时器)
+;; Log the clocks into this drawer
+(setq org-log-into-drawer "LOGBOOK")
+
+;; Remember to clock out the clock on exit
+(setq org-remember-clock-out-on-exit t)
+
+;; Display clock time both in mode line and frame title
+(setq org-clock-clocked-in-display (quote both))
+;; Clocking:3 ends here
+
+
+;; 其他
+;; 修改图片下载路径为目录下的 pics 路径内，注意，下载的图片都在 pics里面
+(require 'org-download)
+;; (setq-default org-download-image-dir (concat org-agenda-directory "/pics"))
+(setq-default org-download-image-dir (concat (substring org-agenda-directory 0 7) "/pics"))
+
+;; 提醒闹钟
+(require 'org-alert)
+(setq alert-default-style 'libnotify)
+
+)
+
+(provide 'conf-org)
