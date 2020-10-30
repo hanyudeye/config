@@ -1,0 +1,17 @@
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+
+#Entry for /dev/sda7 :
+UUID=5c7b1b26-37df-400b-b498-c1faae282aed	/	ext4	errors=remount-ro	0	1
+#Entry for /dev/sda6 :
+UUID=70676b8f-5eb2-4f71-a597-8f8218f5e5e3	/home	ext4	nodev,nosuid	0	2
+#Entry for /dev/sdb1 :
+UUID=0DC311AB0DC311AB	/media/Windows10	ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0
+#Entry for /dev/sdb2 :
+UUID=0005D5040006FBE9	/media/d	ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0
+#Entry for /dev/sdb3 :
+UUID=00049AA900048E92	/media/doc	ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0
+/swapfile	none	swap	sw	0	0
+
+

@@ -28,6 +28,14 @@
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  )
 
+;; 绑定微信小程序 文件模式
+(setq auto-mode-alist (cons '("\\.wxml\\'" . web-mode)
+                            auto-mode-alist))
+
+(setq auto-mode-alist (cons '("\\.wxss\\'" . less-css-mode)
+                            auto-mode-alist))
+
+
 
 ;;调用朗读软件朗读选区
 (defun langdu(start end)
