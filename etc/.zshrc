@@ -2,33 +2,38 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="/home/wuming/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -49,23 +54,23 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git wd web-search history zsh-history-substring-search zsh-autosuggestions
-    extract zsh-syntax-highlighting python django docker  zsh-proxy
-)
+plugins=(git autojump fd shell-proxy wd web-search history history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.zsh/zsh-peco-history/zsh-peco-history.zsh
 
 # User configuration
 
@@ -84,9 +89,6 @@ source ~/.zsh/zsh-peco-history/zsh-peco-history.zsh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -95,45 +97,41 @@ source ~/.zsh/zsh-peco-history/zsh-peco-history.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#
-. /usr/share/autojump/autojump.sh
 
-#默认打开程序
-alias -s rb=emacs -c
-alias -s py=emacs -c
-alias -s js=emacs -c
-alias -s c=emacs -c
-alias -s java=emacs -c
-alias -s txt=emacs -c
-alias -s gz='tar -xzvf'
-alias -s tgz='tar -xzvf'
-alias -s zip='unzip'
-alias -s bz2='tar -xjvf'
-alias -s pdf=okular
-alias -s epub=ebook-viewer
-alias -s mobi=ebook-viewer
-alias ll='ls -alh'
-alias fd=fdfind
+export DEFAULT_PROXY=http://127.0.0.1:33375
+export EDITOR="emacsclient -c"
+export PATH=~/.npm-global/bin:$PATH
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/wuming/.sdkman"
-[[ -s "/home/wuming/.sdkman/bin/sdkman-init.sh" ]] && source "/home/wuming/.sdkman/bin/sdkman-init.sh"
+alias emc="emacsclient -a=emacs -c"
+alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
 
-# 执行nvm命令
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# 自定义删除命令 ，代替 rm
+function trash()
+{
+	  pi=()
+	  pj=()
+	  while [[ $# -ge 1 ]]; do
+		    tmp=$1
+		    if [[ "${tmp:0:1}" == '-' ]] ;then
+			      tmp=${tmp//r/f}
+			      tmp=${tmp//d/f}
+			      pi=(${pi[@]} $tmp)
+		    else
+			      pj=(${pj[@]} $tmp)
+		    fi
+		    shift
+	  done
+    mv ${pi[@]} ${pj[@]} /tmp
+}
+alias mrm='trash $@'
 
-#设置代理
-# config-proxy
-
-alias  emc='emacsclient -a=emacs -c -s ~/.emacs/server/server'
-alias  fd='fdfind'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-
 # Load rbenv automatically by appending
 # the following to ~/.zshrc:
 
 eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

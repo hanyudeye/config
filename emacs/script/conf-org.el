@@ -4,7 +4,7 @@
   ;; 1. 变量初始化
 
   ;; 初始化org-agenda 目录
-  (setq org-agenda-directory "~/org/agenda")
+  (setq org-agenda-directory "~/xinde/agenda")
 
 ;; 2.外观设置
 
