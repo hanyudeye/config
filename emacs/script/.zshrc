@@ -98,12 +98,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export DEFAULT_PROXY=127.0.0.1:33375
+export DEFAULT_PROXY=http://127.0.0.1:33375
 export EDITOR="emacsclient -c"
 export PATH=~/.npm-global/bin:$PATH
 
 alias emc="emacsclient -a=emacs -c"
-alias memc="emacs -q -l /home/wuming/hackproduct/emacs/origin/init.el"
+alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
 
 # 自定义删除命令 ，代替 rm
 function trash()
@@ -132,3 +132,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 eval "$(rbenv init -)"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

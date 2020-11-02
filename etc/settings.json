@@ -13,7 +13,7 @@
   ],
   "python.pythonPath": "/home/wuming/.pyenv/versions/3.7.0/bin/python3.7",
   "window.zoomLevel": 2,
-  "http.proxy": "http://127.0.0.1:42428",
+  // "http.proxy": "http://127.0.0.1:42428",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "extensions.ignoreRecommendations": false,
@@ -82,7 +82,9 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "vsicons.dontShowNewVersionMessage": true,
   "workbench.startupEditor": "newUntitledFile",
+  "http.proxyAuthorization": null,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }

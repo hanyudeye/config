@@ -1,5 +1,9 @@
-// 将键绑定放入此文件中以覆盖默认值
 [
+  {
+    "key": "alt+m alt+v",
+    "command": "toggleVim",
+    "when": "editorTextFocus && !inDebugRepl"
+  },
   {
     "key": "alt+l",
     "command": "cursorRight",
@@ -122,9 +126,9 @@
     "key": "ctrl+l",
     "command": "file-browser.stepIn",
     "when": "inFileBrowser"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
   }
-  // {
-  //   "key": "ctrl+b",
-  //   "command": "-workbench.action.toggleSidebarVisibility"
-  // }
 ]
