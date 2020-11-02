@@ -144,9 +144,9 @@ bindsym $mod+z exec "flameshot gui"
 bindsym mod1+Tab workspace next
 bindsym $mod+Tab workspace prev
 
-set $ws1 1:emacs
+set $ws1 1:chrome
 set $ws2 2:document
-set $ws3 3:chrome
+set $ws3 3:other
 set $ws4 4:game
 
 # switch to workspace
@@ -180,11 +180,11 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # assign [class="jetbrains-android-studio"] $ws6
-assign [class="Emacs"] $ws1
+assign [class="Emacs"] $ws2
 # assign [class="Gnome-terminal"] $ws2
 assign [class="okular"] $ws2
 assign [class="zeal"] $ws2
-assign [class="Google-chrome"] $ws3
+assign [class="Google-chrome"] $ws1
 # assign [class="^URxvt$"] 2
 
 #===window control===

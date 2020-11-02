@@ -57,16 +57,15 @@
     (start-process "espeak" nil "espeak" "-ven" "-s 70"  "-a 20" content)
     ))
 
-
 (server-start)
-(require 'conf-custom)
-(require 'conf-proxy)
-(require 'conf-file)
+;; (require 'conf-custom)
+;; (require 'conf-proxy)
 (require 'conf-org)
+(require 'conf-file)
 
 
 ;; 默认开代理
-(proxy-http-enable)
+;; (proxy-http-enable)
 
 
 (provide 'conf-general)
