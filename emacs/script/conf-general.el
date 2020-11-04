@@ -54,7 +54,7 @@
   (let ((content (buffer-substring start end)))
     ;; (start-process NAME BUFFER PROGRAM &rest PROGRAM-ARGS)
     ;; (start-process "espeak" nil "espeak" "-vcmn" "-s 100"  "-a 20" content)
-    (start-process "espeak" nil "espeak" "-ven" "-s 70"  "-a 20" content)
+    (start-process "espeak" nil "espeak" "-ven" "-s 70"  "-a 20" "-m" content)
     ))
 
 (server-start)

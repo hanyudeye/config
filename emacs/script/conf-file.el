@@ -7,11 +7,15 @@
   (find-file "~/xinde/dao.md")
   )
 
-(defun find-org-project()
+
+
+;; 读书
+(defun read-book-ai()
   (interactive)
-  (find-file "~/xinde/life/project.org")
+  (find-file "~/book/我的世界观.txt")
   )
 
+(evil-leader/set-key "o b a" 'read-book-ai)
 
 (defun find-org-html()
   (interactive)
@@ -42,7 +46,6 @@
   (interactive)
   (find-file "~/xinde/business/经济学.md")
   )
-
 
 (defun find-org-note()
   (interactive)
