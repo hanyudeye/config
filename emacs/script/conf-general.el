@@ -23,10 +23,17 @@
 
  ;;ranger
  ranger-width-preview 0.70
-
-
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  )
+
+
+;;ranger
+(setq ranger-enter-with-minus 'ranger)
+(setq ranger-show-literal nil)
+(setq ranger-cleanup-eagerly t)
+(setq ranger-parent-depth 0)
+(setq ranger-ignored-extensions '("mkv" "iso" "mp4"))
+
 
 ;; 绑定微信小程序 文件模式
 (setq auto-mode-alist (cons '("\\.wxml\\'" . web-mode)

@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 #交换ctrl 和 capslock
 setxkbmap -option "ctrl:swapcaps"
 

@@ -72,9 +72,7 @@ This function should only modify configuration layer settings."
           ;; org-enable-github-support t
           ;; org-enable-reveal-js-support t
           org-enable-hugo-support t
-          ;; org-projectile-file "TODOs.org"
           org-enable-bootstrap-support t
-          org-agenda-span 'day
           org-agenda-start-with-log-mode t
           ;;番茄时钟
           org-pomodoro-length 45
