@@ -1,12 +1,73 @@
 (with-eval-after-load 'org
   ;; 初始化org-agenda 目录
-  (setq org-agenda-directory "~/xinde/agenda")
+  (setq org-agenda-dir "~/xinde/agenda")
 
-  (setq org-agenda-files (append
-                          (directory-files-recursively org-agenda-directory "\\.org$")
-                          (directory-files-recursively org-agenda-directory "\\.org.txt$")))
+  (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
+  (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
+  (setq org-agenda-file-work (expand-file-name "work.org" org-agenda-dir))
+  (setq org-agenda-file-journal (expand-file-name "journal.org" org-agenda-dir))
+  (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
+  (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
+  (setq org-agenda-file-blogposts (expand-file-name "all-posts.org" org-agenda-dir))
+  (setq org-agenda-files (list org-agenda-dir))
 
+  ;; (setq org-agenda-files (append
+  ;;                         (directory-files-recursively org-agenda-dir "\\.org$")
+  ;;                         (directory-files-recursively org-agenda-dir "\\.org.txt$")))
 
+      (setq org-capture-templates
+            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Workspace")
+               "* TODO [#B] %?\n  %i\n %U"
+               :empty-lines 1)
+              ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
+               "* %?\n  %i\n %U"
+               :empty-lines 1)
+              ("b" "Blog Ideas" entry (file+headline org-agenda-file-note "Blog Ideas")
+               "* TODO [#B] %?\n  %i\n %U"
+               :empty-lines 1)
+              ("s" "Code Snippet" entry
+               (file org-agenda-file-code-snippet)
+               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
+              ("w" "work" entry (file+headline org-agenda-file-work "Work")
+               "* TODO [#A] %?\n  %i\n %U"
+               :empty-lines 1)
+              ("x" "Web Collections" entry
+               (file+headline org-agenda-file-note "Web")
+               "* %U %:annotation\n\n%:initial\n\n%?")
+              ("p" "Protocol" entry (file+headline org-agenda-file-note "Inbox")
+               "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Inbox")
+               "* %? [[%:link][%:description]] \nCaptured On: %U")
+              ("c" "Chrome" entry (file+headline org-agenda-file-note "Quick notes")
+               "* TODO [#C] %?\n %(zilongshanren/retrieve-chrome-current-tab-url)\n %i\n %U"
+               :empty-lines 1)
+              ("l" "links" entry (file+headline org-agenda-file-note "Quick notes")
+               "* TODO [#C] %?\n  %i\n %a \n %U"
+               :empty-lines 1)
+              ("j" "Journal Entry"
+               entry (file+datetree org-agenda-file-journal)
+               "* %?"
+               :empty-lines 1)))
+
+      ;;An entry without a cookie is treated just like priority ' B '.
+      ;;So when create new task, they are default 重要且紧急
+      (setq org-agenda-custom-commands
+            '(
+              ("w" . "任务安排")
+              ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+              ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+              ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+              ("b" "Blog" tags-todo "BLOG")
+              ("p" . "项目安排")
+              ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"work\"")
+              ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"zilongshanren\"")
+              ("W" "Weekly Review"
+               ((stuck "") ;; review stuck projects as designated by org-stuck-projects
+                (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
+                ))))
+
+;; 打开emacs 即启动org-agenda 
+  ;; (org-agenda-list)
 ;; ;; 2.外观设置
 
 ;;   ;; (require 'org-indent)
@@ -49,6 +110,21 @@
 ;;         (quote
 ;;          ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
 ;;   ;; To-Do states and related:1 ends here
+
+
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
+                (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)" "MEETING(m)" "PHONE(p)"))))
+
+  ;; Change task state to STARTED when clocking in
+  (setq org-clock-in-switch-to-state "STARTED")
+  ;; Save clock data and notes in the LOGBOOK drawer
+  (setq org-clock-into-drawer t)
+  ;; Removes clocked tasks with 0:00 duration
+  (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
+
+  (setq org-tags-match-list-sublevels nil)
+
 
 ;;   ;; Colors for todo states
 
@@ -173,7 +249,13 @@
 ;;       "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
 
 ;; ;; 禁止启动检测
-;; (setq org-agenda-inhibit-startup t)
+(setq org-agenda-inhibit-startup t)
+
+(setq org-agenda-span 'day)
+(setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
+(setq org-agenda-window-setup 'current-window)
+(setq org-log-done t)
+
 
 ;; ;; Helper functions
 ;; ;; Extract the date of completion, and use it for comparison. From http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
