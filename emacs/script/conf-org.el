@@ -9,9 +9,10 @@
 
 ;; ;; 2.外观设置
 
-;;   ;; (require 'org-indent)
-;;   ;; (setq org-startup-indented t)
-;;   ;; Appearance:1 ends here
+;;   (require 'org-indent)
+;;   (setq org-startup-indented t)
+;; ;
+;   ;; Appearance:1 ends here
 
 
 ;;  (defun zilongshanren-org/init-cal-china-x ()

@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump fd shell-proxy wd web-search history history-substring-search)
+plugins=(git autojump fd shell-proxy wd web-search history history-substring-search ssh-agent tmux extract gitignore)
 
 source $ZSH/oh-my-zsh.sh
 
