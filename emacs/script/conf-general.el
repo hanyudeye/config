@@ -21,10 +21,16 @@
 ;;设置服务
  dotspacemacs-server-socket-dir "~/.emacs/server"
 
- ;;ranger
- ranger-width-preview 0.70
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  )
+
+;;search engine
+(setq search-engine-config-list '((baidu
+                                                        :name "baidu"
+                                                        :url "http://www.baidu.com/s?wd=%s"
+                                                        :keywords (:docstring "百度搜索"
+                                                                              ;; :browser 'eww-browse-url
+                                                                              ))))
 
 
 ;;ranger
@@ -33,6 +39,51 @@
 (setq ranger-cleanup-eagerly t)
 (setq ranger-parent-depth 0)
 (setq ranger-ignored-extensions '("mkv" "iso" "mp4"))
+
+;;python
+(setq python-backend 'lsp)
+(setq python-lsp-server 'mspyls)
+(setq python-pipenv-activate t)
+(setq python-lsp-git-root "~/soft/app/python-language-server")
+
+;;dash
+(setq dash-autoload-common-docsets nil)
+(setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
+
+
+;;easy-hugo
+(use-package easy-hugo
+:init
+;; Main blog
+(setq easy-hugo-basedir "~/blog/hugo/")
+(setq easy-hugo-url "https://aming.xyz")
+;; (setq easy-hugo-sshdomain "blogdomain")
+(setq easy-hugo-root "/home/blog/")
+(setq easy-hugo-previewtime "300")
+(define-key global-map (kbd "C-c C-e") 'easy-hugo)
+
+(setq easy-hugo-bloglist
+	;; blog2 setting
+	'(((easy-hugo-basedir . "~/src/github.com/masasam/hugo2/")
+	(easy-hugo-url . "http://example2.com")
+	(easy-hugo-sshdomain . "myblogdomain")
+	(easy-hugo-root . "/home/hugo/"))
+	;; blog3 setting for aws s3
+	((easy-hugo-basedir . "~/src/github.com/masasam/hugo3/")
+	(easy-hugo-url . "http://example3.net")
+	(easy-hugo-amazon-s3-bucket-name . "yourS3bucketname"))
+	;; blog4 setting for google cloud strage
+	((easy-hugo-basedir . "~/src/github.com/masasam/hugo4/")
+	(easy-hugo-url . "http://example4.net")
+	(easy-hugo-google-cloud-storage-bucket-name . "yourGCPbucketname")
+	(easy-hugo-image-directory . "img"))
+	;; blog5 for github pages
+	((easy-hugo-basedir . "~/src/github.com/masasam/githubpages/")
+	(easy-hugo-url . "https://yourid.github.io"))
+	;; blog6 for firebase hosting
+	((easy-hugo-basedir . "~/src/github.com/masasam/firebase/")
+	(easy-hugo-url . "https://yourproject.firebaseapp.com"))))
+:bind ("C-c C-e" . easy-hugo))
 
 
 ;; 绑定微信小程序 文件模式
@@ -69,6 +120,7 @@
 ;; (require 'conf-proxy)
 (require 'conf-org)
 (require 'conf-file)
+(require 'conf-display)
 
 
 ;; 默认开代理
