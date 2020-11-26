@@ -42,6 +42,14 @@
 (setq auto-mode-alist (cons '("\\.wxss\\'" . less-css-mode)
                             auto-mode-alist))
 
+(setq search-engine-config-list
+      '((google-translate
+         :name "Google Translate"
+         :url "https://translate.google.cn/#view=home&op=translate&sl=auto&tl=auto&text=%s")
+        (baidu
+         :name "Baidu"
+         :url "https://www.baidu.com/s?wd=%s"))
+      )
 
 
 ;;调用朗读软件朗读选区
