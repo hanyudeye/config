@@ -99,7 +99,11 @@
          :url "https://translate.google.cn/#view=home&op=translate&sl=auto&tl=auto&text=%s")
         (baidu
          :name "Baidu"
-         :url "https://www.baidu.com/s?wd=%s"))
+         :url "https://www.baidu.com/s?wd=%s")
+        (wikizh
+         :name "维基百科中文"
+         :url "https://zh.wikipedia.org/wiki/%s")
+        )
       )
 
 
