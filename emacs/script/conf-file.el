@@ -85,7 +85,7 @@
 
 (defun find-org-chengxuyuan()
   (interactive)
-  (find-file "/home/wuming/xinde/self/程序员.org")
+  (find-file "/home/wuming/xinde/工具的使用/工作工具/程序员.org")
   )
 
 (defun find-org-xinfu()

@@ -2,7 +2,7 @@
 shopt -s nullglob
 
 # 壁纸放置目录 如需更改壁纸目录请更改~/Pictures/wallpaper为相应的存放目录
-cd ~/图片/Pictures/wallpaper
+cd ~/图片/wallpaper
 
 while true; do
     files=()
