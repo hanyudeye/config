@@ -7,7 +7,7 @@ cd ~/图片/wallpaper
 while true; do
     files=()
     #图片后缀名
-    for i in *.jpg *.png; do
+    for i in *.jpeg *.jpg *.png; do
         [[ -f $i ]] && files+=("$i")
     done
     range=${#files[@]}

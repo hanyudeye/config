@@ -4,7 +4,7 @@
 ;; 打开文件快捷键
 (defun find-org-dao()
   (interactive)
-  (find-file "~/xinde/dao.md")
+  (find-file "~/temp/dao.md")
   )
 
 
@@ -19,52 +19,27 @@
 
 (defun find-org-html()
   (interactive)
-  (find-file "~/xinde/html.html")
+  (find-file "~/temp/html/html.html")
   )
 
-(defun find-org-tohtml()
+(defun find-org-chuangye()
   (interactive)
-  (find-file "~/xinde/html.org")
-  )
-
-(defun find-org-zuoxi()
-  (interactive)
-  (find-file "~/xinde/self/zuoxi.org")
-  )
-
-(defun find-org-work()
-  (interactive)
-  (find-file "~/xinde/self/工作.org")
-  )
-
-(defun find-org-shengyi()
-  (interactive)
-  (find-file "~/xinde/business/生意.org")
-  )
-
-(defun find-org-jingji()
-  (interactive)
-  (find-file "~/xinde/business/经济学.md")
+  (find-file "~/temp/创业.org")
   )
 
 (defun find-org-note()
   (interactive)
-  (find-file "~/xinde/agenda/notes.md")
-  )
-
-(defun find-org-money()
-  (interactive)
-  (find-file "~/xinde/self/money.el")
+  (find-file "~/temp/notes.md")
   )
 
 (defun find-org-temp()
   (interactive)
-  (find-file "~/xinde/temp.org")
+  (find-file "~/temp/temp.org")
   )
 
 (defun find-org-log()
   (interactive)
-  (find-file "/home/wuming/xinde/log.org")
+  (find-file "~/temp/log.org")
   )
 
 
@@ -73,34 +48,9 @@
   (find-file "/home/wuming/config/passwd/passwd.org")
   )
 
-(defun find-org-readbook()
-  (interactive)
-  (find-file "/home/wuming/blog/hugo/content/post/readbook.org")
-  )
 
-(defun find-org-book()
-  (interactive)
-  (find-file "/home/wuming/xinde/life/book.org")
-  )
-
-(defun find-org-chengxuyuan()
-  (interactive)
-  (find-file "/home/wuming/xinde/工具的使用/工作工具/程序员.org")
-  )
-
-(defun find-org-xinfu()
-  (interactive)
-  (find-file "/home/wuming/xinde/幸福.org")
-  )
-
-
-(evil-leader/set-key "o o a" 'find-org-project)
-(evil-leader/set-key "o o b" 'find-org-readbook)
-(evil-leader/set-key "o o c" 'find-org-chengxuyuan)
-(evil-leader/set-key "o o d" 'find-org-dao)
-(evil-leader/set-key "o o f" 'find-org-xinfu)
+(evil-leader/set-key "o o c" 'find-org-chuangye)
 (evil-leader/set-key "o o h" 'find-org-html)
-(evil-leader/set-key "o o j" 'find-org-tohtml)
 (evil-leader/set-key "o o m" 'find-org-money)
 (evil-leader/set-key "o o n" 'find-org-note)
 (evil-leader/set-key "o o p" 'find-org-passwd)
@@ -121,46 +71,46 @@
 
 (defun find-demo-sql()
   (interactive)
-  (find-file "~/demo/sql/sql.sql")
+  (find-file "~/temp/sql/sql.sql")
   )
 
 (defun find-demo-c()
   (interactive)
-  (find-file "~/demo/c/c.c")
+  (find-file "~/temp/c/c.c")
   )
 
 (defun find-demo-php()
   (interactive)
-  (find-file "~/demo/php/php.php")
+  (find-file "~/temp/php/php.php")
   )
 
 (defun find-demo-lisp()
   (interactive)
-  (find-file "~/demo/lisp/lisp.el")
+  (find-file "~/temp/lisp/lisp.el")
   )
 (defun find-demo-python()
   (interactive)
-  (find-file "~/demo/python/python.py")
+  (find-file "~/temp/python/python.py")
   )
 
 (defun find-demo-asm()
   (interactive)
-  (find-file "~/demo/c/asm.S")
+  (find-file "~/temp/c/asm.S")
   )
 
 (defun find-demo-node()
   (interactive)
-  (find-file "~/demo/js/node.js")
+  (find-file "~/temp/js/node.js")
   )
 
 (defun find-demo-html()
   (interactive)
-  (find-file "~/demo/js/html.html")
+  (find-file "~/temp/js/html.html")
   )
 
 (defun find-demo-js()
   (interactive)
-  (find-file "~/demo/js/js.js")
+  (find-file "~/temp/js/js.js")
   )
 
 ;;快捷键
@@ -174,13 +124,5 @@
 (evil-leader/set-key "o d p" 'find-demo-php)
 (evil-leader/set-key "o d s" 'find-demo-sql)
 (evil-leader/set-key "o d y" 'find-demo-python)
-
-;;工程
-(defun find-project-ssyg()
-  (interactive)
-  (find-file "~/xinde/project/ssyg-jiegou.sql")
-  )
-
-(evil-leader/set-key "o j s" 'find-project-ssyg)
 
 (provide 'conf-file)

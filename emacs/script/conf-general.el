@@ -5,7 +5,7 @@
  ;; sdcv-popup-function 'tooltip-show
  ;; sdcv-popup-function 'pos-tip-show
  ;;不发音
- sdcv-word-pronounce nil
+ ;; sdcv-word-pronounce nil
 
  ;; google 翻译
  google-translate-default-source-language "en"
@@ -22,6 +22,7 @@
  dotspacemacs-server-socket-dir "~/.emacs/server"
 
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
+ ;; browse-url-browser-function 'eww-browse-url 
  )
 
 ;;search engine
@@ -32,13 +33,17 @@
                                                                               ;; :browser 'eww-browse-url
                                                                               ))))
 
-
 ;;ranger
 (setq ranger-enter-with-minus 'ranger)
+(setq ranger-preview-file t)
 (setq ranger-show-literal nil)
+(setq ranger-deer-show-details nil)
 (setq ranger-cleanup-eagerly t)
 (setq ranger-parent-depth 0)
 (setq ranger-ignored-extensions '("mkv" "iso" "mp4"))
+(setq ranger-override-dired 'ranger)
+(setq ranger-max-preview-size 3)
+(setq ranger-dont-show-binary t)
 
 ;;python
 (setq python-backend 'lsp)
@@ -50,6 +55,9 @@
 (setq dash-autoload-common-docsets nil)
 (setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
 
+;;snippet
+(setq my-snippet "/home/wuming/.spacemacs.d/snippets")
+(add-to-list 'yas-snippet-dirs my-snippet)
 
 ;;easy-hugo
 (use-package easy-hugo
@@ -115,15 +123,17 @@
     ))
 
 (server-start)
-;; (require 'conf-custom)
-;; (require 'conf-proxy)
+(require 'conf-custom)
+(require 'conf-proxy)
 (require 'conf-org)
 (require 'conf-file)
 (require 'conf-display)
 
-
+;; 加载扩展
+(require 'conf-extends)
 ;; 默认开代理
 ;; (proxy-http-enable)
+
 
 
 (provide 'conf-general)

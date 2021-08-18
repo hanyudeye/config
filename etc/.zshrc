@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump fd shell-proxy wd web-search history history-substring-search ssh-agent tmux extract gitignore)
+plugins=(git autojump fd shell-proxy wd web-search history history-substring-search ssh-agent tmux extract gitignore zsh-autosuggestions fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,7 +104,45 @@ export PATH=~/.npm-global/bin:$PATH
 
 alias emc="emacsclient -a=emacs -c"
 alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
+alias fd="fdfind"
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+# Load rbenv automatically by appending
+# the following to ~/.zshrc:
+
+eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
+#java
+JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64/"
+
+#android
+export PATH="$HOME/soft/app/android-studio/bin:$PATH"
+#image
+export PATH="$HOME/soft/app/:$PATH"
+
+#composer
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+#moven
+export MAVEN_HOME=/opt/apache-maven-3.6.3
+export PATH=$MAVEN_HOME/bin:$HOME/soft/app/idea-IC-211.6693.111/bin:$PATH
+
+# 当前使用的是 java ide idea 教育版
+# export PATH=$MAVEN_HOME/bin:$HOME/soft/app/idea-IU-203.7148.57/bin:$PATH
+# /home/wuming/soft/app/idea-IC-211.6693.111
+
+# 函数定义 
 # 自定义删除命令 ，代替 rm
 function trash()
 {
@@ -125,20 +163,8 @@ function trash()
 }
 alias mrm='trash $@'
 
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-# Load rbenv automatically by appending
-# the following to ~/.zshrc:
-
-eval "$(rbenv init -)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
+function zeal-docs-fix(){
+    pushd "$HOME/.local/share/Zeal/Zeal/docsets" >/dev/null || return
+    find . -iname 'react-main*.js' -exec rm '{}' \;
+ 
+}

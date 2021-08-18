@@ -7,4 +7,4 @@ setxkbmap -option "ctrl:swapcaps"
 ssh-add ~/.ssh/coding_rsa
 ssh-add ~/.ssh/github_rsa
 
-xrandr --output LVDS-1-1 --primary --output VGA-1-1 --right-of LVDS-1-1
+# xrandr --output LVDS-1-1 --primary --output VGA-1-1 --right-of LVDS-1-1
