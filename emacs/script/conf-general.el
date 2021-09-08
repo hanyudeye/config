@@ -63,19 +63,18 @@
 (use-package easy-hugo
 :init
 ;; Main blog
-(setq easy-hugo-basedir "~/blog/hugo/")
+(setq easy-hugo-basedir "~/mainwork/blog/hugo/")
 (setq easy-hugo-url "https://aming.xyz")
 ;; (setq easy-hugo-sshdomain "blogdomain")
-(setq easy-hugo-root "/home/blog/")
+(setq easy-hugo-root "~/mainwork/blog/hugo/")
 (setq easy-hugo-previewtime "300")
 (define-key global-map (kbd "C-c C-e") 'easy-hugo)
 
 (setq easy-hugo-bloglist
 	;; blog2 setting
-	'(((easy-hugo-basedir . "~/src/github.com/masasam/hugo2/")
+	    '(((easy-hugo-basedir . "~/mainwork/blog/hugo2/")
 	(easy-hugo-url . "http://example2.com")
-	(easy-hugo-sshdomain . "myblogdomain")
-	(easy-hugo-root . "/home/hugo/"))
+	(easy-hugo-root . "~/mainwork/blog/hugo2/"))
 	;; blog3 setting for aws s3
 	((easy-hugo-basedir . "~/src/github.com/masasam/hugo3/")
 	(easy-hugo-url . "http://example3.net")
@@ -128,6 +127,7 @@
 (require 'conf-org)
 (require 'conf-file)
 (require 'conf-display)
+(require 'conf-key)
 
 ;; 加载扩展
 (require 'conf-extends)

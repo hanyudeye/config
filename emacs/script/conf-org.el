@@ -1,7 +1,6 @@
 (with-eval-after-load 'org
   ;; 初始化org-agenda 目录
-  (setq org-agenda-dir "~/org/agenda")
-
+  (setq org-agenda-dir "~/worldmind/agenda")
   (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
   (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
   (setq org-agenda-file-work (expand-file-name "work.org" org-agenda-dir))
