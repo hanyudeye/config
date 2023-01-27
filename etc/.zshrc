@@ -97,14 +97,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export DEFAULT_PROXY=http://127.0.0.1:33375
-export EDITOR="emacsclient -c"
-export PATH=~/.npm-global/bin:$PATH
-
-alias emc="emacsclient -a=emacs -c"
-alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
 alias fd="fdfind"
+alias r="ranger"
+alias mrm='trash $@'
+
+# emacs设置
+# alias emc="emacsclient -a=emacs -c"
+alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
+alias emacs='emacs -nw'
+alias e='emacsclient -t'
+export ALTERNATE_EDITOR=""
+
+# 别名
+#alias ls="python /media/wuming/common/code/shell/ls.py"
+#alias cd="python /media/wuming/common/code/shell/cd.py"
+
+# DEFAULT_PROXY is deprecated
+# export DEFAULT_PROXY=http://127.0.0.1:33375
+export SHELLPROXY_URL=http://127.0.0.1:33375
+
+# export EDITOR="emacsclient -c"
+export PATH=~/.npm-global/bin:$PATH
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 # Load rbenv automatically by appending
@@ -124,7 +137,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 #java
-JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64/"
+JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
+CLASSPATH="$JAVA_HOME/lib"
 
 #android
 export PATH="$HOME/soft/app/android-studio/bin:$PATH"
@@ -134,9 +148,12 @@ export PATH="$HOME/soft/app/:$PATH"
 #composer
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
+#python vscode
+export PATH="$HOME/.local/bin:$PATH"
+
 #moven
 export MAVEN_HOME=/opt/apache-maven-3.6.3
-export PATH=$MAVEN_HOME/bin:$HOME/soft/app/idea-IC-211.6693.111/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$HOME/soft/app/idea-IC-211.6693.111/bin:$HOME/soft/deb/Postman:$PATH
 
 # 当前使用的是 java ide idea 教育版
 # export PATH=$MAVEN_HOME/bin:$HOME/soft/app/idea-IU-203.7148.57/bin:$PATH
@@ -161,10 +178,17 @@ function trash()
 	  done
     mv ${pi[@]} ${pj[@]} /tmp
 }
-alias mrm='trash $@'
+
 
 function zeal-docs-fix(){
     pushd "$HOME/.local/share/Zeal/Zeal/docsets" >/dev/null || return
     find . -iname 'react-main*.js' -exec rm '{}' \;
- 
 }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export GEM_HOME="~/.ruby/"
+export GEM_PATH="$HOME/.gem/ruby/2.6.0/bin"
+export PATH="$PATH:$GEM_PATH:$HOME/.rvm/bin"
+
+# ssh-add ~/.ssh/rsa_gmail
+nohup ssh-add ~/.ssh/rsa_gmail >/dev/null 2>&1

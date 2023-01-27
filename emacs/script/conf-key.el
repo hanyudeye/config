@@ -1,9 +1,5 @@
-(define-key evil-normal-state-map "gl" 'evil-end-of-line)
-(define-key evil-visual-state-map "gl" 'evil-end-of-line)
-(define-key evil-motion-state-map "gl" 'evil-end-of-line)
-(define-key evil-hybrid-state-map "gl" 'evil-end-of-line)
+(global-set-key "\M-n" 'ranger-next-tab)
+(global-set-key "\M-p" 'ranger-prev-tab)
 
-
-
-
+(global-set-key (kbd "S-SPC")   'toggle-input-method)
 (provide 'conf-key)

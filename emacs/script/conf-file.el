@@ -1,21 +1,6 @@
 ;; latexa 预览了
 ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-;; 打开文件快捷键
-(defun find-org-dao()
-  (interactive)
-  (find-file "~/temp/dao.md")
-  )
-
-
-
-;; 读书
-(defun read-book-ai()
-  (interactive)
-  (find-file "~/book/我的世界观.txt")
-  )
-
-(evil-leader/set-key "o b a" 'read-book-ai)
 
 (defun find-org-html()
   (interactive)
@@ -45,12 +30,10 @@
 
 (defun find-org-passwd()
   (interactive)
-  (find-file "/home/wuming/config/passwd/passwd.org")
+  (find-file "/home/wuming/me/config/passwd/passwd.org")
   )
 
 
-(evil-leader/set-key "o o c" 'find-org-chuangye)
-(evil-leader/set-key "o o h" 'find-org-html)
 (evil-leader/set-key "o o m" 'find-org-money)
 (evil-leader/set-key "o o n" 'find-org-note)
 (evil-leader/set-key "o o p" 'find-org-passwd)
