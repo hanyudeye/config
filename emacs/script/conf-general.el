@@ -2,14 +2,20 @@
  evil-escape-key-sequence "kj"
  evil-escape-delay 0.5
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
+ ;; sdcv 词典配置
+ sdcv-word-pronounce nil
+ sdcv-popup-function 'popup-tip
 )
+
+
+;; (setq sdcv-popup-function 'popup-tip)
 ;; ;;search engine
 ;; (setq search-engine-config-list '((baidu
-;;                                                         :name "baidu"
-;;                                                         :url "http://www.baidu.com/s?wd=%s"
-;;                                                         :keywords (:docstring "百度搜索"
-;;                                                                               ;; :browser 'eww-browse-url
-;;                                                                               ))))
+;;                                      :name "baidu"
+;;                                      :url "http://www.baidu.com/s?wd=%s"
+;;                                      :keywords (:docstring "百度搜索"
+;;                                                            ;; :browser 'eww-browse-url
+;;                                                            ))))
 ;;ranger
 (setq ranger-enter-with-minus 'ranger)
 (setq ranger-preview-file t)
@@ -43,11 +49,21 @@
 (setq auto-mode-alist (cons '("\\.wxss\\'" . less-css-mode)
                             auto-mode-alist))
 
+
+(defun find-org-passwd()
+  (interactive)
+  (find-file "/home/wuming/me/config/passwd/passwd.org")
+  )
+
+(evil-leader/set-key "o o p" 'find-org-passwd)
+;;sdcv 翻译
+(evil-leader/set-key "o s" 'sdcv-search-pointer+)
+
 (server-start)
 ;; (require 'conf-custom)
 (require 'conf-proxy)
 ;; (require 'conf-org)
-;; (require 'conf-file)
+(require 'conf-file)
 ;; (require 'conf-display)
 ;; (require 'conf-key)
 ;; (require 'conf-rime)
