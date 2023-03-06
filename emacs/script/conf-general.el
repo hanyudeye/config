@@ -19,7 +19,7 @@
  eww-search-prefix "http://www.baidu.com/s?wd="
 
 ;;设置服务
- dotspacemacs-server-socket-dir "~/.emacs/server"
+;; dotspacemacs-server-socket-dir "~/.emacs/server"
 
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; browse-url-browser-function 'eww-browse-url 
