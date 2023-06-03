@@ -15,6 +15,9 @@
  ;;对于弹出buffer,是否获得焦点 
  google-translate-pop-up-buffer-set-focus t
 
+;; go 翻译
+ go-translate-token-current (cons 730153 730153)
+
  ;; 搜索
  eww-search-prefix "http://www.baidu.com/s?wd="
 
@@ -24,6 +27,12 @@
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; browse-url-browser-function 'eww-browse-url 
  )
+
+;;agenda
+(spacemacs/toggle-mode-line-minor-modes-off)
+(spacemacs/toggle-mode-line-responsive-off)
+(spacemacs/toggle-mode-line-version-control-off)
+
 
 ;;search engine
 (setq search-engine-config-list '((baidu
@@ -44,6 +53,10 @@
 (setq ranger-override-dired 'ranger)
 (setq ranger-max-preview-size 3)
 (setq ranger-dont-show-binary t)
+
+(global-set-key "\M-n" 'ranger-next-tab)
+(global-set-key "\M-p" 'ranger-prev-tab)
+
 
 ;;python
 (setq python-backend 'lsp)
@@ -132,7 +145,7 @@
 ;; 加载扩展
 (require 'conf-extends)
 ;; 默认开代理
-;; (proxy-http-enable)
+(proxy-http-enable)
 
 
 
