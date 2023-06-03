@@ -1,6 +1,5 @@
 ;; Network Proxy
-;; (setq centaur-proxy "127.0.0.1:33375")
-(setq centaur-proxy "127.0.0.1:57370")
+(setq centaur-proxy "127.0.0.1:33375")
 
 (defun proxy-http-show ()
   "Show HTTP/HTTPS proxy."

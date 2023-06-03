@@ -15,3 +15,8 @@ UUID=00049AA900048E92	/media/doc	ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0
 /swapfile	none	swap	sw	0	0
 
 
+
+## 视频剪辑1
+UUID=DCE484D2E484B076 /media/wuming/视频剪辑1 ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0
+## common
+UUID=B836C78336C7415C /media/wuming/common	ntfs-3g	defaults,locale=zh_CN.UTF-8	0	0

@@ -1,6 +1,7 @@
 (setq-default
  evil-escape-key-sequence "kj"
  evil-escape-delay 0.5
+<<<<<<< HEAD
  ;; sdcv-popup-function 'popup-tip
  ;; sdcv-popup-function 'tooltip-show
  ;; sdcv-popup-function 'pos-tip-show
@@ -22,17 +23,15 @@
  eww-search-prefix "http://www.baidu.com/s?wd="
 
 ;;设置服务
- dotspacemacs-server-socket-dir "~/.emacs/server"
+;; dotspacemacs-server-socket-dir "~/.emacs/server"
 
+=======
+>>>>>>> b1ed84319c94ad1e77822e2f51e9f017220b5344
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
- ;; browse-url-browser-function 'eww-browse-url 
- )
-
-;;agenda
-(spacemacs/toggle-mode-line-minor-modes-off)
-(spacemacs/toggle-mode-line-responsive-off)
-(spacemacs/toggle-mode-line-version-control-off)
-
+ ;; sdcv 词典配置
+ sdcv-word-pronounce nil
+ sdcv-popup-function 'popup-tip
+)
 
 ;;search engine
 (setq search-engine-config-list '((baidu
@@ -42,6 +41,14 @@
                                                                               ;; :browser 'eww-browse-url
                                                                               ))))
 
+;; (setq sdcv-popup-function 'popup-tip)
+;; ;;search engine
+;; (setq search-engine-config-list '((baidu
+;;                                      :name "baidu"
+;;                                      :url "http://www.baidu.com/s?wd=%s"
+;;                                      :keywords (:docstring "百度搜索"
+;;                                                            ;; :browser 'eww-browse-url
+;;                                                            ))))
 ;;ranger
 (setq ranger-enter-with-minus 'ranger)
 (setq ranger-preview-file t)
@@ -72,40 +79,6 @@
 (setq my-snippet "/home/wuming/.spacemacs.d/snippets")
 (add-to-list 'yas-snippet-dirs my-snippet)
 
-;;easy-hugo
-(use-package easy-hugo
-:init
-;; Main blog
-(setq easy-hugo-basedir "~/mainwork/blog/hugo/")
-(setq easy-hugo-url "https://aming.xyz")
-;; (setq easy-hugo-sshdomain "blogdomain")
-(setq easy-hugo-root "~/mainwork/blog/hugo/")
-(setq easy-hugo-previewtime "300")
-(define-key global-map (kbd "C-c C-e") 'easy-hugo)
-
-(setq easy-hugo-bloglist
-	;; blog2 setting
-	    '(((easy-hugo-basedir . "~/mainwork/blog/hugo2/")
-	(easy-hugo-url . "http://example2.com")
-	(easy-hugo-root . "~/mainwork/blog/hugo2/"))
-	;; blog3 setting for aws s3
-	((easy-hugo-basedir . "~/src/github.com/masasam/hugo3/")
-	(easy-hugo-url . "http://example3.net")
-	(easy-hugo-amazon-s3-bucket-name . "yourS3bucketname"))
-	;; blog4 setting for google cloud strage
-	((easy-hugo-basedir . "~/src/github.com/masasam/hugo4/")
-	(easy-hugo-url . "http://example4.net")
-	(easy-hugo-google-cloud-storage-bucket-name . "yourGCPbucketname")
-	(easy-hugo-image-directory . "img"))
-	;; blog5 for github pages
-	((easy-hugo-basedir . "~/src/github.com/masasam/githubpages/")
-	(easy-hugo-url . "https://yourid.github.io"))
-	;; blog6 for firebase hosting
-	((easy-hugo-basedir . "~/src/github.com/masasam/firebase/")
-	(easy-hugo-url . "https://yourproject.firebaseapp.com"))))
-:bind ("C-c C-e" . easy-hugo))
-
-
 ;; 绑定微信小程序 文件模式
 (setq auto-mode-alist (cons '("\\.wxml\\'" . web-mode)
                             auto-mode-alist))
@@ -114,39 +87,28 @@
                             auto-mode-alist))
 
 
-;;调用朗读软件朗读选区
-(defun langdu(start end)
-  "朗读开始和 end 区域的内容"
-  (interactive "r")
-  (let ((content (buffer-substring start end)))
-    ;; (call-process "/usr/local/bin/ekho" nil t nil content)
+(defun find-org-passwd()
+  (interactive)
+  (find-file "/home/wuming/me/config/passwd/passwd.org")
+  )
 
-    ;; (start-process NAME BUFFER PROGRAM &rest PROGRAM-ARGS)
-    (start-process "ekho" nil "ekho" "-s20" "-a -80" content)
-    ))
-
-;;调用朗读软件朗读选区
-(defun langdu-espeak(start end)
-  (interactive "r")
-  (let ((content (buffer-substring start end)))
-    ;; (start-process NAME BUFFER PROGRAM &rest PROGRAM-ARGS)
-    ;; (start-process "espeak" nil "espeak" "-vcmn" "-s 100"  "-a 20" content)
-    (start-process "espeak" nil "espeak" "-ven" "-s 70"  "-a 20" "-m" content)
-    ))
+(evil-leader/set-key "o o p" 'find-org-passwd)
+;;sdcv 翻译
+(evil-leader/set-key "o s" 'sdcv-search-pointer+)
 
 (server-start)
-(require 'conf-custom)
+;; (require 'conf-custom)
 (require 'conf-proxy)
-(require 'conf-org)
+;; (require 'conf-org)
 (require 'conf-file)
-(require 'conf-display)
-(require 'conf-key)
+;; (require 'conf-display)
+;; (require 'conf-key)
+;; (require 'conf-rime)
 
 ;; 加载扩展
 (require 'conf-extends)
+(require 'conf-agenda)
 ;; 默认开代理
 (proxy-http-enable)
-
-
 
 (provide 'conf-general)
