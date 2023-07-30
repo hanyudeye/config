@@ -1,12 +1,13 @@
-;Autohotkey script
-;John Walker, 2010-11-25
+;Autohotkey script 热键脚本
+;John Walker, 2010-11-25 约翰 沃克
 ;http://www.inertreactants.com
 ;Feel free to reuse, edit and redistribute
 ;Key remaps for Apple users using boot camp
 ;(with an Apple notebook or Keyboard)
+; 适用于苹果用户
 
 ;following section remaps alt-delete keys to mimic OSX
-;command-delete deletes whole line
+;command-delete deletes whole line 删除整行，OSX 系统下
 #BS::Send {LShift down}{Home}{LShift Up}{Del}
 
 ;alt-function-delete deletes next word
