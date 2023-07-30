@@ -16,6 +16,9 @@
  ;;对于弹出buffer,是否获得焦点 
  google-translate-pop-up-buffer-set-focus t
 
+;; go 翻译
+ go-translate-token-current (cons 730153 730153)
+
  ;; 搜索
  eww-search-prefix "http://www.baidu.com/s?wd="
 
@@ -30,6 +33,13 @@
  sdcv-popup-function 'popup-tip
 )
 
+;;search engine
+(setq search-engine-config-list '((baidu
+                                                        :name "baidu"
+                                                        :url "http://www.baidu.com/s?wd=%s"
+                                                        :keywords (:docstring "百度搜索"
+                                                                              ;; :browser 'eww-browse-url
+                                                                              ))))
 
 ;; (setq sdcv-popup-function 'popup-tip)
 ;; ;;search engine
@@ -50,6 +60,10 @@
 (setq ranger-override-dired 'ranger)
 (setq ranger-max-preview-size 3)
 (setq ranger-dont-show-binary t)
+
+(global-set-key "\M-n" 'ranger-next-tab)
+(global-set-key "\M-p" 'ranger-prev-tab)
+
 
 ;;python
 (setq python-backend 'lsp)
@@ -95,6 +109,6 @@
 (require 'conf-extends)
 (require 'conf-agenda)
 ;; 默认开代理
-;; (proxy-http-enable)
+(proxy-http-enable)
 
 (provide 'conf-general)
