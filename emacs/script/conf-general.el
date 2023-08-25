@@ -1,7 +1,6 @@
 (setq-default
  evil-escape-key-sequence "kj"
  evil-escape-delay 0.5
-<<<<<<< HEAD
  ;; sdcv-popup-function 'popup-tip
  ;; sdcv-popup-function 'tooltip-show
  ;; sdcv-popup-function 'pos-tip-show
@@ -25,8 +24,6 @@
 ;;设置服务
 ;; dotspacemacs-server-socket-dir "~/.emacs/server"
 
-=======
->>>>>>> b1ed84319c94ad1e77822e2f51e9f017220b5344
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
@@ -66,18 +63,18 @@
 
 
 ;;python
-(setq python-backend 'lsp)
-(setq python-lsp-server 'mspyls)
-(setq python-pipenv-activate t)
-(setq python-lsp-git-root "~/soft/app/python-language-server")
+;; (setq python-backend 'lsp)
+;; (setq python-lsp-server 'mspyls)
+;; (setq python-pipenv-activate t)
+;; (setq python-lsp-git-root "~/soft/app/python-language-server")
 
 ;;dash
-(setq dash-autoload-common-docsets nil)
-(setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
+;; (setq dash-autoload-common-docsets nil)
+;; (setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
 
 ;;snippet
-(setq my-snippet "/home/wuming/.spacemacs.d/snippets")
-(add-to-list 'yas-snippet-dirs my-snippet)
+;; (setq my-snippet "/home/wuming/.spacemacs.d/snippets")
+;; (add-to-list 'yas-snippet-dirs my-snippet)
 
 ;; 绑定微信小程序 文件模式
 (setq auto-mode-alist (cons '("\\.wxml\\'" . web-mode)
@@ -87,28 +84,28 @@
                             auto-mode-alist))
 
 
-(defun find-org-passwd()
-  (interactive)
-  (find-file "/home/wuming/me/config/passwd/passwd.org")
-  )
+;; (defun find-org-passwd()
+;;   (interactive)
+;;   (find-file "/home/wuming/me/config/passwd/passwd.org")
+;;   )
 
-(evil-leader/set-key "o o p" 'find-org-passwd)
+;; (evil-leader/set-key "o o p" 'find-org-passwd)
 ;;sdcv 翻译
 (evil-leader/set-key "o s" 'sdcv-search-pointer+)
 
-(server-start)
+;; (server-start)
 ;; (require 'conf-custom)
-(require 'conf-proxy)
+;; (require 'conf-proxy)
 ;; (require 'conf-org)
-(require 'conf-file)
+;; (require 'conf-file)
 ;; (require 'conf-display)
 ;; (require 'conf-key)
 ;; (require 'conf-rime)
 
 ;; 加载扩展
-(require 'conf-extends)
-(require 'conf-agenda)
+;; (require 'conf-extends)
+;; (require 'conf-agenda)
 ;; 默认开代理
-(proxy-http-enable)
+;; (proxy-http-enable)
 
 (provide 'conf-general)
