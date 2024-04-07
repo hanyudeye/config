@@ -1,7 +1,6 @@
 (setq-default
  evil-escape-key-sequence "kj"
  evil-escape-delay 0.5
-<<<<<<< HEAD
  ;; sdcv-popup-function 'popup-tip
  ;; sdcv-popup-function 'tooltip-show
  ;; sdcv-popup-function 'pos-tip-show
@@ -25,8 +24,6 @@
 ;;设置服务
 ;; dotspacemacs-server-socket-dir "~/.emacs/server"
 
-=======
->>>>>>> b1ed84319c94ad1e77822e2f51e9f017220b5344
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
