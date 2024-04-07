@@ -1,4 +1,5 @@
-﻿; Change Caps Lock to Control when held down; otherwise, Escape
+﻿; 修改 Caps 按键到 Control 键
+; Change Caps Lock to Control when held down; otherwise, Escape
 *CapsLock::
     Send {Blind}{Ctrl Down}
     cDown := A_TickCount
