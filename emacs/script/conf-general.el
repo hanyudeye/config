@@ -28,7 +28,12 @@
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
  sdcv-popup-function 'popup-tip
+ sdcv-fail-notify-string nil
+
+ ;; 解压缩
+ nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
 )
+
 
 ;;search engine
 (setq search-engine-config-list '((baidu

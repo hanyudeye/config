@@ -1,0 +1,8 @@
+" 复制到系统剪切板
+" vnoremap <C-c> "+y
+" nnoremap <C-c> "+y
+"
+" " 从系统剪切板粘贴
+" nnoremap <C-v> "+p
+" inoremap <C-v> <C-r>+
+
