@@ -95,7 +95,7 @@
 
 (server-start)
 ;; (require 'conf-custom)
-(require 'conf-proxy)
+;;(require 'conf-proxy)
 ;; (require 'conf-org)
 (require 'conf-file)
 ;; (require 'conf-display)
@@ -104,8 +104,8 @@
 
 ;; 加载扩展
 (require 'conf-extends)
-(require 'conf-agenda)
+;;(require 'conf-agenda)
 ;; 默认开代理
-(proxy-http-enable)
+;;(proxy-http-enable)
 
 (provide 'conf-general)
