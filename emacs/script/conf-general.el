@@ -28,7 +28,12 @@
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
  sdcv-popup-function 'popup-tip
+ sdcv-fail-notify-string nil
+
+ ;; 解压缩
+ nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
 )
+
 
 ;;search engine
 (setq search-engine-config-list '((baidu
@@ -63,18 +68,18 @@
 
 
 ;;python
-(setq python-backend 'lsp)
-(setq python-lsp-server 'mspyls)
-(setq python-pipenv-activate t)
-(setq python-lsp-git-root "~/soft/app/python-language-server")
+;; (setq python-backend 'lsp)
+;; (setq python-lsp-server 'mspyls)
+;; (setq python-pipenv-activate t)
+;; (setq python-lsp-git-root "~/soft/app/python-language-server")
 
 ;;dash
-(setq dash-autoload-common-docsets nil)
-(setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
+;; (setq dash-autoload-common-docsets nil)
+;; (setq dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets")
 
 ;;snippet
-(setq my-snippet "/home/wuming/.spacemacs.d/snippets")
-(add-to-list 'yas-snippet-dirs my-snippet)
+;; (setq my-snippet "/home/wuming/.spacemacs.d/snippets")
+;; (add-to-list 'yas-snippet-dirs my-snippet)
 
 ;; 绑定微信小程序 文件模式
 (setq auto-mode-alist (cons '("\\.wxml\\'" . web-mode)
@@ -84,28 +89,39 @@
                             auto-mode-alist))
 
 
-(defun find-org-passwd()
-  (interactive)
-  (find-file "/home/wuming/me/config/passwd/passwd.org")
-  )
+;; (defun find-org-passwd()
+;;   (interactive)
+;;   (find-file "/home/wuming/me/config/passwd/passwd.org")
+;;   )
 
-(evil-leader/set-key "o o p" 'find-org-passwd)
+;; (evil-leader/set-key "o o p" 'find-org-passwd)
 ;;sdcv 翻译
 (evil-leader/set-key "o s" 'sdcv-search-pointer+)
 
-(server-start)
+;; (server-start)
 ;; (require 'conf-custom)
+<<<<<<< HEAD
 ;;(require 'conf-proxy)
+=======
+;; (require 'conf-proxy)
+>>>>>>> d9f6e9df9b3cf3f3edaf47a26b819063432af65b
 ;; (require 'conf-org)
-(require 'conf-file)
+;; (require 'conf-file)
 ;; (require 'conf-display)
 ;; (require 'conf-key)
 ;; (require 'conf-rime)
 
 ;; 加载扩展
+<<<<<<< HEAD
 (require 'conf-extends)
 ;;(require 'conf-agenda)
 ;; 默认开代理
 ;;(proxy-http-enable)
+=======
+;; (require 'conf-extends)
+;; (require 'conf-agenda)
+;; 默认开代理
+;; (proxy-http-enable)
+>>>>>>> d9f6e9df9b3cf3f3edaf47a26b819063432af65b
 
 (provide 'conf-general)
