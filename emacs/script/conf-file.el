@@ -3,6 +3,22 @@
 
 
 (evil-leader/set-key "o o p" 'find-org-passwd)
+
+(defun find-org-passwd()
+  (interactive)
+  (find-file "/home/wuming/me/config/passwd/passwd.org")
+  )
+
+(evil-leader/set-key "o o p" 'find-org-passwd)
+
+(defun find-org-temp()
+  (interactive)
+  (find-file "/home/wuming/me/config/temp.org")
+  )
+
+(evil-leader/set-key "o o t" 'find-org-temp)
+
+
 ;; (evil-leader/set-key "o l" 'langdu)
 ;; (evil-leader/set-key "o e" 'langdu-espeak)
 ;; (evil-leader/set-key "o f" 'youdao-dictionary-search-at-point+)

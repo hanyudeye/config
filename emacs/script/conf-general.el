@@ -4,9 +4,16 @@
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
+ ;; sdcv-word-pronounce t
  sdcv-popup-function 'popup-tip
+ ;; sdcv-popup-function 'pos-tip-show
+ eww-search-prefix "https://bing.com/search?q="
 )
 
+;; 取消光标所在行的高亮
+(global-hl-line-mode -1)
+
+; (package-install 'keycast)
 
 ;; (setq sdcv-popup-function 'popup-tip)
 ;; ;;search engine
@@ -30,7 +37,7 @@
 
 ;;python
 (setq python-backend 'lsp)
-(setq python-lsp-server 'mspyls)
+;; (setq python-lsp-server 'mspyls)
 (setq python-pipenv-activate t)
 (setq python-lsp-git-root "~/soft/app/python-language-server")
 
@@ -49,6 +56,13 @@
 (setq auto-mode-alist (cons '("\\.wxss\\'" . less-css-mode)
                             auto-mode-alist))
 
+;; OPTIONAL configuration
+(setq
+ gptel-model "llama3"
+ gptel-backend (gptel-make-ollama "Ollama"
+                                  :host "localhost:11434"
+                                  :stream t
+                                  :models '("llama3")))
 
 (defun find-org-passwd()
   (interactive)
@@ -59,18 +73,22 @@
 ;;sdcv 翻译
 (evil-leader/set-key "o s" 'sdcv-search-pointer+)
 
-(server-start)
+;; (server-start)
 ;; (require 'conf-custom)
 (require 'conf-proxy)
 ;; (require 'conf-org)
 (require 'conf-file)
+;; (load-file "/the/repo/dir/read-aloud.el")
+;; (setq read-aloud-engine "ekho")
+(require 'conf-ekho)
+
 ;; (require 'conf-display)
 ;; (require 'conf-key)
-;; (require 'conf-rime)
+(require 'conf-rime)
 
 ;; 加载扩展
-(require 'conf-extends)
-(require 'conf-agenda)
+;; (require 'conf-extends)
+;; (require 'conf-agenda)
 ;; 默认开代理
 ;; (proxy-http-enable)
 
