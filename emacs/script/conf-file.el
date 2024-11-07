@@ -24,7 +24,7 @@
 ;; (evil-leader/set-key "o f" 'youdao-dictionary-search-at-point+)
 
 ;;声明前缀
-;; (spacemacs/declare-prefix "o o" "file")
+(spacemacs/declare-prefix "o o" "file")
 ;; (spacemacs/declare-prefix "o i" "insert")
 ;; (spacemacs/declare-prefix "o j" "project")
 ;; (spacemacs/declare-prefix "o d" "demo")
@@ -34,8 +34,16 @@
   (find-file "~/temp/sql/sql.sql")
   )
 
+(defun find-file-todo()
+  (interactive)
+  (find-file "f:/me/todo/todo.org")
+  )
+
+
+
 ;;快捷键
 (evil-leader/set-key "o s" 'sdcv-search-pointer+)
+(evil-leader/set-key "o o d" 'find-file-todo)
 ;; (evil-leader/set-key "o d y" 'find-demo-python)
 
 (provide 'conf-file)

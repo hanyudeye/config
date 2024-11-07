@@ -19,15 +19,6 @@
 
 ;;; Code:
 
-;; 配置
-;; $ grep '^[^#]' ~/.config/speech-dispatcher/speechd.conf
-;; LogLevel  3
-;; LogDir  "default"
-;; DefaultRate  40
-;; DefaultVolume 100
-;; AudioOutputMethod "alsa"
-;; DefaultModule flite
-
 (defvar read-aloud-engine "speech-dispatcher")
 (defvar read-aloud-engines
   '("speech-dispatcher"			; Linux/FreeBSD only
@@ -43,8 +34,6 @@
 (defvar read-aloud-max 160)		; chars
 (defface read-aloud-text-face '((t :inverse-video t))
   "For highlighting the text that is being read")
-
-
 
 (require 'cl-lib)
 (require 'subr-x)
@@ -297,7 +286,6 @@ ask user for an additional input."
        "selection")
     (read-aloud--current-word)) )
 
-
 
 (defun read-aloud--u-switch-to-buffer(buf)
   (unless (eq (current-buffer) buf)
@@ -340,7 +328,6 @@ return (beg end word) or nil."
 	(list start end (buffer-substring-no-properties start end)))
       )))
 
-
 
 (provide 'read-aloud)
 ;;; read-aloud.el ends here
