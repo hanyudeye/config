@@ -100,24 +100,32 @@ source $ZSH/oh-my-zsh.sh
 alias fd="fdfind"
 alias r="ranger"
 alias mrm='trash $@'
+alias f='fzf'
+alias t='trans -b'
+alias e='vi $(fzf)'
 
 # emacs设置
 # alias emc="emacsclient -a=emacs -c"
-alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
-alias emacs='emacs -nw'
-alias e='emacsclient -t'
-export ALTERNATE_EDITOR=""
+# alias memc="emacs -q -l /home/wuming/code/emacs/origin/init.el"
+# alias emacs='emacs -nw'
+# alias e='emacsclient -t'
+export ALTERNATE_EDITOR="vim"
 
 # 别名
 #alias ls="python /media/wuming/common/code/shell/ls.py"
 #alias cd="python /media/wuming/common/code/shell/cd.py"
 
+alias mls="python /home/wuming/me/config/utils/mls.py"
+
+
 # DEFAULT_PROXY is deprecated
 # export DEFAULT_PROXY=http://127.0.0.1:33375
-export SHELLPROXY_URL=http://127.0.0.1:33375
+export SHELLPROXY_URL=http://127.0.0.1:20171
+# export https_proxy=https://127.0.0.1:20171
 
+export QT_IM_MODULES=ibus
 # export EDITOR="emacsclient -c"
-export PATH=~/.npm-global/bin:$PATH
+# export PATH=~/.npm-global/bin:$PATH
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 # Load rbenv automatically by appending
@@ -126,8 +134,9 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # python
 export PYENV_ROOT="$HOME/.pyenv"
@@ -192,3 +201,4 @@ export PATH="$PATH:$GEM_PATH:$HOME/.rvm/bin"
 
 # ssh-add ~/.ssh/rsa_gmail
 nohup ssh-add ~/.ssh/rsa_gmail >/dev/null 2>&1
+# export LC_CTYPE="zh_CN.utf8"

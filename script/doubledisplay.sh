@@ -13,7 +13,7 @@ xrandr --output HDMI-0 --rotate left  --output DP-0 --mode 2560x1440  --primary 
 # xrandr --output DP-0 --dpi 220
 # xrandr --output DP-0 --primary --dpi 220 --left-of HDMI-0
 
-xrandr --output DP-0 --scale 0.45x0.45 --left-of HDMI-0 
+#xrandr --output DP-0 --scale 0.45x0.45 --left-of HDMI-0 
 
 # xrandr --output DP-0 --primary --dpi 220 --left-of HDMI-0  --dpi 125
 

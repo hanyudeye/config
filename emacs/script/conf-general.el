@@ -27,13 +27,20 @@
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
  ;; sdcv 词典配置
  sdcv-word-pronounce nil
+ ;; sdcv-word-pronounce t
  sdcv-popup-function 'popup-tip
+ ;; sdcv-popup-function 'pos-tip-show
+ eww-search-prefix "https://bing.com/search?q="
  sdcv-fail-notify-string nil
 
  ;; 解压缩
  nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
 )
 
+;; 取消光标所在行的高亮
+(global-hl-line-mode -1)
+
+; (package-install 'keycast)
 
 ;;search engine
 (setq search-engine-config-list '((baidu
@@ -88,6 +95,13 @@
 (setq auto-mode-alist (cons '("\\.wxss\\'" . less-css-mode)
                             auto-mode-alist))
 
+;; OPTIONAL configuration
+(setq
+ gptel-model "llama3"
+ gptel-backend (gptel-make-ollama "Ollama"
+                                  :host "localhost:11434"
+                                  :stream t
+                                  :models '("llama3")))
 
 ;; (defun find-org-passwd()
 ;;   (interactive)
@@ -100,28 +114,16 @@
 
 ;; (server-start)
 ;; (require 'conf-custom)
-<<<<<<< HEAD
-;;(require 'conf-proxy)
-=======
 ;; (require 'conf-proxy)
->>>>>>> d9f6e9df9b3cf3f3edaf47a26b819063432af65b
 ;; (require 'conf-org)
 ;; (require 'conf-file)
 ;; (require 'conf-display)
 ;; (require 'conf-key)
-;; (require 'conf-rime)
+(require 'conf-rime)
 
 ;; 加载扩展
-<<<<<<< HEAD
 (require 'conf-extends)
 ;;(require 'conf-agenda)
 ;; 默认开代理
 ;;(proxy-http-enable)
-=======
-;; (require 'conf-extends)
-;; (require 'conf-agenda)
-;; 默认开代理
-;; (proxy-http-enable)
->>>>>>> d9f6e9df9b3cf3f3edaf47a26b819063432af65b
-
 (provide 'conf-general)

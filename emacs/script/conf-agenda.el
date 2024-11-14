@@ -1,4 +1,3 @@
-
 ;; C-c C-s schedule
 ;; C-c C-d deadline
 (global-set-key (kbd "C-c a") 'org-agenda)

@@ -35,8 +35,6 @@
 (defface read-aloud-text-face '((t :inverse-video t))
   "For highlighting the text that is being read")
 
-
-
 (require 'cl-lib)
 (require 'subr-x)
 
