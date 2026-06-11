@@ -119,8 +119,9 @@
 
   (setq
    ;; gptel-model 'gemma4:e4b
-   gptel-backend (gptel-get-backend "DeepSeek")
-   gptel-model 'deepseek-v4-flash
+   ;; gptel-backend (gptel-get-backend "DeepSeek")
+   gptel-backend (gptel-get-backend "Ollama")
+   ;; gptel-model 'deepseek-v4-flash
    gptel-include-reasoning nil
    )
 
