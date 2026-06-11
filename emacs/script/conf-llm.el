@@ -1,3 +1,5 @@
+;; .authinfo 配置信息
+;; machine api.deepseek.com login apikey password KEY
 (use-package gptel
   :config
   ;; OPTIONAL configuration
