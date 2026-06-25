@@ -30,6 +30,11 @@
 
  ;; 解压缩
  nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
+
+;;  browse-url-browser-function 'browse-url-generic
+;;  browse-url-generic-program "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+
+
  )
 
 (setq elfeed-search-header-function #'elfeed-search--header)
