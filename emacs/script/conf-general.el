@@ -28,14 +28,28 @@
  ;;不发音
  ;; sdcv-word-pronounce nil
 
+ ;;社交媒体
+ ;; mastodon-instance-url "https://mastodon.social"
+
  ;; 解压缩
  nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
 
-;;  browse-url-browser-function 'browse-url-generic
-;;  browse-url-generic-program "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
 
+
+ ;; browse-url-browser-function 'browse-url-generic
+ ;; browse-url-generic-program "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+ ;; browse-url-generic-program "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+ browse-url-browser-function 'eww-browse-url
 
  )
+
+;; 配置 Org Agenda
+(with-eval-after-load 'org
+  (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  (setq org-agenda-custom-commands
+        '(("d" "Dayly Review"
+           agenda ""
+           ((org-agenda-span 'day))))))
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
