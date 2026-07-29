@@ -1,10 +1,8 @@
-* RSS 订阅
-** 个人博客
-*** https://mercurychong.blogspot.com/feeds/posts/default            :必读:
-*** https://blog.goodboyboy.top/atom.xml 
-** 科技
-** 程序员
-* 博客
-** 个人博客
-*** https://blog.goodboyboy.top/atom.xml :GoodBoyBoy:
-*** https://mercurychong.blogspot.com/feeds/posts/default?alt=rss :水星熊:
+* 个人博客 :elfeed:
+** https://mercurychong.blogspot.com/feeds/posts/default
+** https://news.ycombinator.com/rss
+** https://blog.devtang.com/atom.xml
+** https://news.ycombinator.com/rss
+** https://www.reddit.com/r/technology/.rss
+** https://36kr.com/feed
+

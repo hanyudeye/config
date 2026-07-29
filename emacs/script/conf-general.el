@@ -2,6 +2,7 @@
 ;; (setq configuration-layer-elpa-archives
 ;;       '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
 ;;         ("org-cn"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+;;          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
 ;;         ("gnu-cn"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
 
@@ -41,6 +42,12 @@
  ;; browse-url-generic-program "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
  browse-url-browser-function 'eww-browse-url
 
+ ;; 配置 shell 终端的宽度
+ ;; shell-default-shell 'eat
+ shell-default-shell 'vterm
+ shell-pop-window-size 40
+ shell-pop-window-position "right"
+
  )
 
 ;; 配置 Org Agenda
@@ -77,7 +84,6 @@
                                  ;; 默认行为（如打开文本文件）
                                  (t
                                   (find-file path))))))
-
 
 ;; 配置快捷键
 (spacemacs/set-leader-keys "o s" 'sdcv-search-pointer+)
