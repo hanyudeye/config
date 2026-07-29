@@ -45,7 +45,7 @@
 
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
-  (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  (setq org-agenda-files '("~/org/" "~/me/wo/living/time.org"))
   (setq org-agenda-custom-commands
         '(("d" "Dayly Review"
            agenda ""
