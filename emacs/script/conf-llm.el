@@ -53,7 +53,13 @@
          ;; :embedding-model "deepseek-v4-flash"
          )
         )
+
+  ;; 关闭非自由软件警告
+  (setq llm-warn-on-nonfree nil)
   (ellama-context-header-line-global-mode +1)
   (ellama-session-header-line-global-mode +1))
+
+
+(spacemacs/set-leader-keys "o c" 'ellama-translate)
 
 (provide 'conf-llm)
