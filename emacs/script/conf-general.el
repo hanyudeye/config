@@ -46,17 +46,17 @@
  ;; shell-default-shell 'eat
  shell-default-shell 'vterm
  shell-pop-window-size 40
- shell-pop-window-position "right"
+ ;; shell-pop-window-position "right"
+ shell-pop-window-position "bottom"
+ ;; shell-default-position 'bottom
 
  )
 
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
   (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
-  (setq org-agenda-custom-commands
-        '(("d" "Dayly Review"
-           agenda ""
-           ((org-agenda-span 'day))))))
+  (setq org-agenda-span 'day)
+  )
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
