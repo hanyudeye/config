@@ -47,9 +47,6 @@
   (setq ellama-output-remove-reasoning t)
   ;; (setq ellama-translation-template)
   (setq ellama-show-reasoning nil)
-
-
-
   )
 
 (use-package ellama
@@ -57,14 +54,24 @@
   :bind ("C-c e" . ellama)
   :hook (org-ctrl-c-ctrl-c-hook . ellama-chat-send-last-message)
   :init (setopt ellama-auto-scroll t)
-  (require 'llm-ollama)
-  (setopt ellama-provider
-          (make-llm-ollama
-           :chat-model "qwen3.6:35b"
-           :embedding-model "nomic-embed-text"
-           :default-chat-non-standard-params '(("num_ctx" . 32768))))
   :config
+  (require 'llm-deepseek)
+  (setq ellama-provider
+        (make-llm-deepseek
+         :key (auth-source-pick-first-password :host "api.deepseek.com")
+         ;; :url "api.deepseek.com"
+         ;; :key ellama-api-key
+         :chat-model "deepseek-v4-flash"
+         ;; :embedding-model "deepseek-v4-flash"
+         )
+        )
+
+  ;; 关闭非自由软件警告
+  (setq llm-warn-on-nonfree nil)
   (ellama-context-header-line-global-mode +1)
   (ellama-session-header-line-global-mode +1))
-;; ellama-select-model
+
+
+(spacemacs/set-leader-keys "o c" 'ellama-translate)
+
 (provide 'conf-llm)
