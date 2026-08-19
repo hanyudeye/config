@@ -45,23 +45,29 @@
  ;; 配置 shell 终端的宽度
  ;; shell-default-shell 'eat
  shell-default-shell 'vterm
- shell-pop-window-size 40
- shell-pop-window-position "right"
+ shell-pop-window-size 30
+ shell-pop-window-position "bottom"
 
  )
 
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
-  (setq org-agenda-files '("~/org/" "~/me/wo/living/time.org"))
-  (setq org-agenda-custom-commands
-        '(("d" "Dayly Review"
-           agenda ""
-           ((org-agenda-span 'day))))))
+  (setq org-agenda-files '("~/me/wo/living/time.org"))
+  ;;默认是日视图
+  (setq org-agenda-span 'day)
+  ;; (org-agenda-log-mode) 开启 log 模式只要使用 **L** 快捷键
+
+
+  ;; (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  )
+
+;; Emacs 29 removed `frame-alpha-lower-limit'，Spacemacs 的透明度/缩放代码仍引用它
+(defvar frame-alpha-lower-limit 20)
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
 ;; 取消光标所在行的高亮
-(global-hl-line-mode -1)
+;; (global-hl-line-mode -1)
 ;; (package-install 'keycast)
 
 (with-eval-after-load 'treemacs
