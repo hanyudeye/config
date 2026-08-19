@@ -73,7 +73,13 @@
 
     (when (window-live-p window)
       (set-window-parameter window 'ellama-window t)
-      (set-window-buffer window buffer))
+      (set-window-buffer window buffer)
+
+      ;; 开启自动换行
+      (with-current-buffer buffer
+        (visual-line-mode 1)
+        (setq-local truncate-lines nil))
+      )
 
     window))
 
