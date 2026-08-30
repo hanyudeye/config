@@ -53,12 +53,10 @@
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
   (setq org-agenda-files '("~/me/wo/living/time.org"))
+  ;; (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
   ;;默认是日视图
   (setq org-agenda-span 'day)
   ;; (org-agenda-log-mode) 开启 log 模式只要使用 **L** 快捷键
-
-
-  ;; (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
   )
 
 ;; Emacs 29 removed `frame-alpha-lower-limit'，Spacemacs 的透明度/缩放代码仍引用它
