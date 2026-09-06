@@ -19,23 +19,23 @@
  paradox-github-token  "21c2b26b816706e094472ea4bbe1d683a373ff0e"
 
  ;; sdcv 词典配置
- sdcv-word-pronounce nil
+ ;;sdcv-word-pronounce nil
  sdcv-popup-function 'popup-tip
  sdcv-fail-notify-string nil
  ;; sdcv-popup-function 'popup-tip
  ;; sdcv-popup-function 'tooltip-show
  ;; sdcv-popup-function 'pos-tip-show
  ;;不发音
- ;; sdcv-word-pronounce nil
+ sdcv-word-pronounce nil
 
  ;; 解压缩
- nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
+ ;;nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
  )
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
 ;; 取消光标所在行的高亮
-(global-hl-line-mode -1)
+;;(global-hl-line-mode -1)
 ;; (package-install 'keycast)
 
 (with-eval-after-load 'treemacs
@@ -64,6 +64,21 @@
 (spacemacs/set-leader-keys "o s" 'sdcv-search-pointer+)
 (spacemacs/set-leader-keys "o o" 'gptel-send)
 
+
+;;设置 emacs 在终端中也可以透明
+;; (set-face-background 'default "unspecified")
+;;(defun on-after-init ()
+;;  (unless (display-graphic-p (selected-frame))
+;;    (set-face-background 'default "unspecified-bg" (selected-frame))))
+;;(add-hook 'window-setup-hook #'on-after-init)
+
+
+;; [[https://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal/33298750#33298750][Emacs: disable theme background color in terminal - Stack Overflow]]
+;;(defun on-frame-open (&optional frame)
+;;  "If the FRAME created in terminal don't load background color."
+;;  (unless (display-graphic-p frame)
+;;    (set-face-background 'default "unspecified-bg" frame)))
+;;(add-hook 'after-make-frame-functions #'on-frame-open)
 
 
 ;;配置 Evil中的 yy,p 使用全局剪切板，下面的配置没有用

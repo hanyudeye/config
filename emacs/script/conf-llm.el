@@ -4,11 +4,6 @@
   :config
   ;; OPTIONAL configuration
   (setq gptel-api-key (auth-source-pick-first-password :host "api.deepseek.com"))
-  (gptel-make-deepseek "DeepSeek"
-    :stream t
-    :models '(deepseek-v4-flash)
-    :key gptel-api-key
-    )
 
   (gptel-make-preset 'mycoding
     :description "写代码模式: deepseek + 严格系统提示"
@@ -109,19 +104,27 @@
 
   ;; (setq gptel-default-preset 'mycoding)
 
+  (gptel-make-deepseek "DeepSeek"
+    :stream t
+    :models '(deepseek-v4-flash)
+    :key gptel-api-key
+    ;; :key "gptel-api-key"
+    )
+
+
   (gptel-make-ollama "Ollama"
     ;; :host "192.168.110.162:11434"
     :host "localhost:11434"
     :stream t
-    :models '(gemma4:e4b)
+    :models '(gemma4:latest llama3:latest )
     )
 
 
   (setq
    ;; gptel-model 'gemma4:e4b
-   ;; gptel-backend (gptel-get-backend "DeepSeek")
-   gptel-backend (gptel-get-backend "Ollama")
-   ;; gptel-model 'deepseek-v4-flash
+   gptel-backend (gptel-get-backend "DeepSeek")
+   ;; gptel-backend (gptel-get-backend "Ollama")
+   gptel-model 'deepseek-v4-flash
    gptel-include-reasoning nil
    )
 
