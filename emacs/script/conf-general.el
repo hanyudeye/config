@@ -2,6 +2,7 @@
 ;; (setq configuration-layer-elpa-archives
 ;;       '(("melpa-cn" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
 ;;         ("org-cn"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+;;          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
 ;;         ("gnu-cn"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
 
@@ -28,9 +29,34 @@
  ;;不发音
  sdcv-word-pronounce nil
 
+ ;;社交媒体
+ ;; mastodon-instance-url "https://mastodon.social"
+
  ;; 解压缩
- ;;nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
+ nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
+
+
+
+ ;; browse-url-browser-function 'browse-url-generic
+ ;; browse-url-generic-program "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+ ;; browse-url-generic-program "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+ browse-url-browser-function 'eww-browse-url
+
+ ;; 配置 shell 终端的宽度
+ ;; shell-default-shell 'eat
+ shell-default-shell 'vterm
+ shell-pop-window-size 40
+ ;; shell-pop-window-position "right"
+ shell-pop-window-position "bottom"
+ ;; shell-default-position 'bottom
+
  )
+
+;; 配置 Org Agenda
+(with-eval-after-load 'org
+  (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  (setq org-agenda-span 'day)
+  )
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
@@ -58,7 +84,6 @@
                                  ;; 默认行为（如打开文本文件）
                                  (t
                                   (find-file path))))))
-
 
 ;; 配置快捷键
 (spacemacs/set-leader-keys "o s" 'sdcv-search-pointer+)
@@ -113,5 +138,5 @@
 
 ;; (server-start)
 (require 'conf-llm)
-
+(require 'conf-file)
 (provide 'conf-general)

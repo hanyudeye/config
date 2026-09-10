@@ -1,30 +1,21 @@
-;; latexa 预览了
-;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+;; (defun find-demo-sql()
+;;   (interactive)
+;;   (find-file "~/temp/sql/sql.sql")
+;;   )
 
+;; (evil-leader/set-key "o o d" 'find-file-todo)
 
-;; (evil-leader/set-key "o o p" 'find-org-passwd)
-;; (evil-leader/set-key "o l" 'langdu)
-;; (evil-leader/set-key "o e" 'langdu-espeak)
-;; (evil-leader/set-key "o f" 'youdao-dictionary-search-at-point+)
-
-;;声明前缀
-(spacemacs/declare-prefix "o o" "file")
-;; (spacemacs/declare-prefix "o i" "insert")
-;; (spacemacs/declare-prefix "o j" "project")
-;; (spacemacs/declare-prefix "o d" "demo")
-
-(defun find-demo-sql()
+(defun my/project-todo-org ()
+  "Open or switch to todo.org in the current project."
   (interactive)
-  (find-file "~/temp/sql/sql.sql")
-  )
+  (let ((todo-file
+         (expand-file-name "todo.org"
+                           (or (projectile-project-root)
+                               default-directory))))
+    (if-let ((buf (get-file-buffer todo-file)))
+        (switch-to-buffer buf)
+      (find-file todo-file))))
 
-(defun find-file-todo()
-  (interactive)
-  (find-file "j:/me/todo/todo.org")
-  )
-
-;;快捷键
-(evil-leader/set-key "o s" 'sdcv-search-pointer+)
-(evil-leader/set-key "o o d" 'find-file-todo)
+(spacemacs/set-leader-keys "o t" #'my/project-todo-org)
 
 (provide 'conf-file)

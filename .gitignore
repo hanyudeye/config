@@ -1,1 +1,3 @@
 password/
+emacs.d/*
+!emacs.d/init.el

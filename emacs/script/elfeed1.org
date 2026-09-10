@@ -1,4 +1,4 @@
-* RSS 订阅 :elfeed:
+* RSS 订阅                                                           :elfeed:
 ** 个人博客
 *** https://mercurychong.blogspot.com/feeds/posts/default
 *** https://blog.goodboyboy.top/atom.xml
@@ -6,3 +6,4 @@
 *** https://www.reddit.com/r/all/top/.rss 
 *** https://www.reddit.com/r/technology/.rss
 *** https://blog.devtang.com/atom.xml
+*** https://news.ycombinator.com/rss
