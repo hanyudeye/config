@@ -33,7 +33,7 @@
  ;; mastodon-instance-url "https://mastodon.social"
 
  ;; 解压缩
- nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
+ ;; nov-unzip-program (executable-find "d:/Program Files/Git/usr/bin/unzip.exe")
 
 
 
