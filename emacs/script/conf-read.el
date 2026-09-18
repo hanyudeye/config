@@ -5,7 +5,7 @@
 (require 'subr-x)
 (require 'cl-lib)
 
-(defcustom my-read-cps 0.5
+(defcustom my-read-cps 0.7
   "估算朗读速度：每秒字符数（中文约 4~6，按语速调整）。"
   :type 'number)
 
@@ -21,7 +21,7 @@
   "每次调节语速的倍率（>1）。"
   :type 'number)
 
-(defcustom my-read-speed-min 0.2
+(defcustom my-read-speed-min 0.05
   "调速系数下限（数值越小越快）。"
   :type 'number)
 
