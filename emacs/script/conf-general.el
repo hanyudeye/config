@@ -41,8 +41,23 @@
  shell-pop-window-size 40
  ;; shell-pop-window-position "right"
  shell-pop-window-position "bottom"
- ;; shell-default-position 'bottom
- )
+;; shell-default-position 'bottom
+  )
+
+;; 覆盖 sdcv-filter：删除首行信息，并把翻译结果复制到 kill-ring
+(with-eval-after-load 'sdcv
+  (defun sdcv-filter (sdcv-string)
+    "过滤 sdcv 输出：去掉首行，同时把结果复制到 Emacs 内置剪贴板（kill-ring）。"
+    (setq sdcv-string (replace-regexp-in-string sdcv-filter-string "" sdcv-string))
+    (if (equal sdcv-string "")
+        sdcv-fail-notify-string
+      (with-temp-buffer
+        (insert sdcv-string)
+        (goto-char (point-min))
+        (kill-line 1)                     ;remove unnecessary information.
+        (let ((result (buffer-string)))
+          (kill-new result)
+          result)))))
 
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
