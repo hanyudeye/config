@@ -38,10 +38,7 @@
  ;; 配置 shell 终端的宽度
  ;; shell-default-shell 'eat
  shell-default-shell 'vterm
- shell-pop-window-size 40
- ;; shell-pop-window-position "right"
- shell-pop-window-position "bottom"
-;; shell-default-position 'bottom
+ shell-pop-window-size 30
   )
 
 ;; 覆盖 sdcv-filter：删除首行信息，并把翻译结果复制到 kill-ring
@@ -58,12 +55,17 @@
         (let ((result (buffer-string)))
           (kill-new result)
           result)))))
-
 ;; 配置 Org Agenda
 (with-eval-after-load 'org
-  (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  (setq org-agenda-files '("~/me/wo/living/time.org"))
+  ;; (setq org-agenda-files '("~/org/" "/mnt/d/me/wo/living/time.org"))
+  ;;默认是日视图
   (setq org-agenda-span 'day)
+  ;; (org-agenda-log-mode) 开启 log 模式只要使用 **L** 快捷键
   )
+
+;; Emacs 29 removed `frame-alpha-lower-limit'，Spacemacs 的透明度/缩放代码仍引用它
+(defvar frame-alpha-lower-limit 20)
 
 (setq elfeed-search-header-function #'elfeed-search--header)
 
