@@ -1,3 +1,4 @@
+;;; conf-llm.el -*- lexical-binding: t; -*-
 ;; .authinfo 配置信息
 ;; machine api.deepseek.com login apikey password KEY
 (use-package gptel
@@ -45,47 +46,101 @@
    gptel-model 'deepseek-v4-flash
    gptel-include-reasoning nil
    )
-
-  (setq ellama-language "China")
-  (setq ellama-output-remove-reasoning t)
-  ;; (setq ellama-translation-template)
-  (setq ellama-show-reasoning nil)
   )
 
-
 ;; ============================================================
-;; Ellama translate 固定底部窗口
+;; gptel 翻译 - 异步流式，底部窗口显示（替代 ellama-translate）
 ;; ============================================================
+(defvar my/gptel-translate-buffer "*gptel-translate*"
+  "gptel 翻译结果展示 buffer.")
 
-(defun my/ellama-display-at-bottom (buffer alist)
-  "固定使用底部 Ellama 窗口显示翻译结果。"
+(defun my/gptel-translate--display-buffer (buffer)
+  "用底部 30% 窗口显示 BUFFER，复用已有翻译窗口。"
   (let ((window
          (or
-          ;; 复用已经存在的 Ellama 窗口
           (seq-find
            (lambda (win)
              (and (window-live-p win)
-                  (eq (window-parameter win 'ellama-window) t)))
+                  (eq (window-parameter win 'gptel-translate-window) t)))
            (window-list (selected-frame) 'no-minibuffer))
-
-          ;; 第一次使用时创建底部窗口
-          (display-buffer-in-direction
-           buffer
-           '((direction . below)
-             (window-height . 0.30))))))
-
+          (display-buffer-in-direction buffer '((direction . below) (window-height . 0.30))))))
     (when (window-live-p window)
-      (set-window-parameter window 'ellama-window t)
+      (set-window-parameter window 'gptel-translate-window t)
       (set-window-buffer window buffer)
-
-      ;; 开启自动换行
       (with-current-buffer buffer
         (visual-line-mode 1)
-        (setq-local truncate-lines nil))
-      )
-
+        (setq-local truncate-lines nil)
+        (read-only-mode -1)))
     window))
 
+(defun my/gptel-translate--with-system (system)
+  "用 SYSTEM 异步翻译选中文本，纯译文流式输出到底部窗口。"
+  (let* ((raw (if (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (or (thing-at-point 'word t) "")))
+         (text (string-trim raw)))
+    (when (string-empty-p text)
+      (user-error "没有可翻译的文本（请先选中）"))
+    (let ((buf (get-buffer-create my/gptel-translate-buffer)))
+      (with-current-buffer buf
+        (read-only-mode -1)
+        (erase-buffer)
+        (goto-char (point-max)))
+      (my/gptel-translate--display-buffer buf)
+      (gptel-request text
+        :stream t
+        :system system
+        :buffer buf
+        :callback
+        (lambda (resp info)
+          (let ((target-buf (plist-get info :buffer)))
+            (when (buffer-live-p target-buf)
+              (with-current-buffer target-buf
+                (let ((inhibit-read-only t))
+                  (cond
+                   ((stringp resp)
+                    (goto-char (point-max))
+                    (insert resp)
+                    (when (window-live-p (get-buffer-window target-buf))
+                      (with-selected-window (get-buffer-window target-buf)
+                        (goto-char (point-max))
+                        (recenter -1))))
+                   ((and (consp resp) (eq (car resp) 'reasoning)) nil)
+                   ((eq resp t)
+                    (goto-char (point-max))
+                    (insert "\n")
+                    (read-only-mode 1)
+                    (message "翻译完成"))
+                   ((null resp)
+                    (goto-char (point-max))
+                    (insert (format "\n[翻译失败: %s]" (plist-get info :status)))
+                    (read-only-mode 1))))))))))))
+
+(defun my/gptel-translate ()
+  "自动识别中英并翻译（兼容旧快捷键）。
+含中文 -> 译英，否则译中。"
+  (interactive)
+  (let* ((raw (if (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (or (thing-at-point 'word t) "")))
+         (text (string-trim raw))
+         (has-chinese (string-match-p "\\cc" text)))
+    (my/gptel-translate--with-system
+     (if has-chinese
+         "You are a professional translator. Translate the user's text into natural English. Output only the translation, no explanation."
+       "你是专业译者，将用户输入翻译成通顺的简体中文，只输出译文，不要解释。"))))
+
+(defun my/gptel-translate-zh-en ()
+  "中译英：强制将选中文本译为英文。"
+  (interactive)
+  (my/gptel-translate--with-system
+   "You are a professional translator. Translate the user's text into natural English. Output only the translation, no explanation."))
+
+(defun my/gptel-translate-en-zh ()
+  "英译中：强制将选中文本译为简体中文。"
+  (interactive)
+  (my/gptel-translate--with-system
+   "你是专业译者，将用户输入翻译成通顺的简体中文，只输出译文，不要解释。"))
 
 
 (use-package ellama
@@ -98,28 +153,19 @@
   (setq ellama-provider
         (make-llm-deepseek
          :key (auth-source-pick-first-password :host "api.deepseek.com")
-         ;; :url "api.deepseek.com"
-         ;; :key ellama-api-key
          :chat-model "deepseek-v4-flash"
-         ;; :embedding-model "deepseek-v4-flash"
          )
         )
-
-  ;; 关闭非自由软件警告
   (setq llm-warn-on-nonfree nil)
-  ;;翻译窗口固定在底部，缺陷就是每次翻译会创建新窗口
-  ;; (setopt ellama-instant-display-action-function #'display-buffer-at-bottom)
-  ;;这是另一个固定的配置
-
-  ;; Ellama instant 请求统一使用我们的 display-buffer 配置
-  (setopt ellama-instant-display-action-function #'my/ellama-display-at-bottom)
-
-
-
   (ellama-context-header-line-global-mode +1)
   (ellama-session-header-line-global-mode +1))
 
-
-(spacemacs/set-leader-keys "o c" 'ellama-translate)
+;; gptel 翻译快捷键
+;; SPC o e = 中译英 (你指定), SPC o c = 英译中, SPC o t = 自动识别
+(spacemacs/set-leader-keys "o e" 'my/gptel-translate-zh-en)
+(spacemacs/set-leader-keys "o c" 'my/gptel-translate-en-zh)
+(spacemacs/set-leader-keys "o t" 'my/gptel-translate)
+(global-set-key (kbd "C-c e") #'my/gptel-translate-zh-en)
+(global-set-key (kbd "C-c c") #'my/gptel-translate-en-zh)
 
 (provide 'conf-llm)
