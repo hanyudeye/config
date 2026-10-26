@@ -12,8 +12,6 @@
 ;; (evil-define-key '(normal insert visual emacs) global-map (kbd "C-x") 'kill-region)
 
 
-;; 全局：C-d 打开 treemacs ,q 退出
-(evil-define-key '(normal insert visual emacs) global-map (kbd "C-d") 'treemacs)
 
 ;; 同步系统剪贴板
 (setq x-select-enable-clipboard t)
